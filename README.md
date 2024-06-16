@@ -123,3 +123,12 @@ git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 ```
 
 Restart tmux and press ```prefix``` + <kbd>I</kbd> to fetch the defined plugins.
+
+#### Picom
+
+#### Polybar
+
+#### i3
+
+#### backgrounds
+- install feh
