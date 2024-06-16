@@ -5,17 +5,31 @@ This directory contains some of my dotfile configurations.
 ## Requirements
 
 Ensure you have the following installed on your system:
+> [!NOTE]
+> Some commands used here are perculiar to Arch Linux (btw). Please refer to the commands that are perculiar to your Linux/Unix distro in case of any conflict.
 
 #### Git
 
 ```
-sudo apt install git
+sudo pacman -S git
 ```
 
 #### Stow
 
 ```
-sudo apt install stow
+sudo pacman -S stow
+```
+
+#### gcc
+
+```
+sudo pacman -S gcc
+```
+
+#### node and npm
+
+```
+sudo pacman -S nodejs npm
 ```
 
 ## Download
@@ -40,12 +54,12 @@ stow fonts
 Install zsh using your distro's package manager:
 
 ```
-sudo apt install zsh
+sudo pacman -S zsh
 ```
 
 Make zsh the default shell:
 ```
-chsh -s $(which zsh)
+sudo chsh -s $(which zsh)
 ```
 
 Use stow to create symlinks for zsh files:
@@ -73,7 +87,7 @@ Install neovim with version >= v0.9.5 using your distro's package manager. If th
 > Before installing Neovim, ensure you have a C compiler, Node, Npm, and a Nerd font installed. I personally use Jetbrains Mono which is the font in the fonts dotfiles above.
 
 ```
-sudo apt install nvim
+sudo pacman -S nvim
 ```
 
 Use stow to create symlinks for the neovim config files:
@@ -89,7 +103,7 @@ Open your terminal and launch Neovim with the ```nvim``` command.
 Install alacritty using your distro's package manager:
 
 ```
-sudo apt install alacritty
+sudo pacman -S alacritty
 ```
 If it's not available in your package manager repository, visit alacritty's [official website](https://alacritty.org/) to find out how to install it for your distro.
 
@@ -104,7 +118,7 @@ stow alacritty
 Install tmux using your distro's package manager:
 
 ```
-sudo apt install tmux
+sudo pacman -S tmux
 ```
 
 Create symlinks to the tmux configuration file:
