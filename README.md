@@ -146,3 +146,5 @@ Restart tmux and press ```prefix``` + <kbd>I</kbd> to fetch the defined plugins.
 
 #### backgrounds
 - install feh
+
+#### Rofi
