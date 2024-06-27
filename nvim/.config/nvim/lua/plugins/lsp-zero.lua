@@ -58,8 +58,19 @@ return {
     dependencies = {
       { 'hrsh7th/cmp-nvim-lsp' },
       { 'williamboman/mason-lspconfig.nvim' },
+      { "WhoIsSethDaniel/mason-tool-installer.nvim" },
     },
     config = function()
+      -- This ensures that mason installs the defined linters and formatters 
+      require("mason-tool-installer").setup({
+        ensure_installed = {
+          "black",
+          "flake8",
+        },
+      })
+      -- There is an issue with mason-tools-installer running with VeryLazy
+      vim.api.nvim_command("MasonToolsInstall")
+
       -- This is where all the LSP shenanigans will live
       local lsp_zero = require('lsp-zero')
       lsp_zero.extend_lspconfig()
