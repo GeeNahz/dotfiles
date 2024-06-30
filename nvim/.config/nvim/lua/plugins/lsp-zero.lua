@@ -108,7 +108,7 @@ return {
         on_attach = on_attach,
         capabilities = capabilities,
         before_init = function(_, config)
-          local default_venv_path = path.join(vim.env.HOME, 'Documents', 'virtualenvs', 'nvim-test', 'bin', 'python')
+          local default_venv_path = path.join(vim.env.HOME, 'Documents', 'virtualenvs', 'nvim-test', 'bin', 'python3')
           config.settings.python.pythonPath = default_venv_path
         end
       })
