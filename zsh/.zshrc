@@ -67,3 +67,11 @@ alias stow='sudo STOW_DIR=/usr/local/stow /usr/bin/stow'
 (( ! ${+functions[p10k]} )) || p10k finalize
 
 export PATH="$PATH:/opt/nvim-linux64/bin"
+
+# pnpm
+export PNPM_HOME="/home/geenahz/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
