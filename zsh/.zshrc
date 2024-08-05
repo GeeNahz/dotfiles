@@ -75,3 +75,14 @@ case ":$PATH:" in
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end
+
+alias ls='ls --color=auto'
+alias grep='grep --color=auto'
+
+# Set up fzf key bindings and fuzzy completion
+source <(fzf --zsh)
+
+alias fzf="fzf --height 60% --layout reverse --border -m --bind 'enter:become(vim {})' --preview 'bat --color=always {}'"
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
