@@ -1,8 +1,10 @@
+@import "colors/mocha.css";
+
 * {
   border: none;
   font-family: JetBrainsMono Nerd Font Mono, Roboto, Arial, sans-serif;
   font-size: 12px;
-  color: #ffffff;
+  color: @text;
   border-radius: 20px;
 }
 
@@ -16,12 +18,12 @@ window#waybar {
 
 /*-----module groups----*/
 .modules-right {
-  background-color: rgba(0, 43, 51, 0.85);
+  background-color: @base;
   margin: 2px 10px 0 0;
 }
 
 .modules-center {
-  background-color: rgba(0, 43, 51, 0.85);
+  background-color: @base;
   margin: 2px 0 0 0;
   padding-left: 10px;
   padding-right: 10px;
@@ -30,25 +32,27 @@ window#waybar {
 .modules-left {
   margin: 2px 0 0 5px;
   background-color: rgba(0, 119, 179, 0.6);
+  background-color: @base;
 }
 
 /*-----modules indv----*/
 #workspaces button {
   padding: 1px 10px;
   background-color: transparent;
+  color: initial;
 }
 
 #workspaces button:hover {
   box-shadow: inherit;
-  background-color: rgba(0, 153, 153, 1);
+  background-color: @overlay0;
 }
 
 #workspaces button.focused {
-  background-color: rgba(0, 43, 51, 0.85);
+  background-color: @mauve;
 }
 
 #workspaces button.active {
-  background-color: rgba(0, 43, 51, 0.85);
+  background-color: @mauve;
 }
 
 #clock,
@@ -64,6 +68,8 @@ window#waybar {
 #tray,
 #mode,
 #custom-power,
+#power-profiles-daemon,
+#backlight,
 #custom-menu,
 #idle_inhibitor {
   padding: 0 10px;
@@ -81,25 +87,49 @@ window#waybar {
   padding: 1px 1px 1px 6px;
 }
 
+#cpu {
+  color: @pink;
+}
+
+#clock {
+  color: @sapphire;
+}
+
+#network {
+  color: @flamingo;
+}
+
+#backlight {
+  color: @lavender;
+}
+
 /*-----Indicators----*/
 #idle_inhibitor.activated {
   color: #2dcc36;
 }
 
+#pulseaudio {
+  color: @peach;
+}
+
 #pulseaudio.muted {
-  color: #cc3436;
+  color: @red;
+}
+
+#battery {
+  color: @teal;
 }
 
 #battery.charging {
-  color: #2dcc36;
+  color: @green;
 }
 
 #battery.warning:not(.charging) {
-  color: #e6e600;
+  color: @rosewater;
 }
 
 #battery.critical:not(.charging) {
-  color: #cc3436;
+  color: @red;
 }
 
 #temperature.critical {
@@ -107,6 +137,7 @@ window#waybar {
 }
 
 #keyboard-state label {
+  color: @sky;
   margin-right: 4px;
   margin-left: 4px;
 }
