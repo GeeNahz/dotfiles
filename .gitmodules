@@ -1,0 +1,9 @@
+[submodule "vim/.vim/plugged/ale"]
+	path = vim/.vim/plugged/ale
+	url = https://github.com/dense-analysis/ale.git
+[submodule "vim/.vim/plugged/catppuccin"]
+	path = vim/.vim/plugged/catppuccin
+	url = https://github.com/catppuccin/vim.git
+[submodule "vim/.vim/plugged/nerdtree"]
+	path = vim/.vim/plugged/nerdtree
+	url = https://github.com/preservim/nerdtree.git
