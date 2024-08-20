@@ -231,3 +231,12 @@ sudo stow rofi
 ```
 
 I have the configurations setup for rofi in i3 config by binding rofi to <span style="color:teal;">$mod</span>+Space.
+
+
+#### Emoji
+Using yay, install emote, a modern emoji picker for Linux. Install it from aur
+
+```sh
+yay -S emote
+```
+To select an emoji, the default keyboard shortcut is `Ctrl+Alt+E`. The keybinding for this has already been setup in the hyprland.config file. Ensure to do this for other window managers or display managers.
