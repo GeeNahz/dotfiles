@@ -82,7 +82,7 @@ alias grep='grep --color=auto'
 # Set up fzf key bindings and fuzzy completion
 source <(fzf --zsh)
 
-alias fzf="fzf --height 60% --layout reverse --border -m --bind 'enter:become(nvim {})' --preview 'bat --color=always {}'"
+alias fzf="fzf --height 60% --layout reverse --border -m --bind 'enter:become(vim {})' --preview 'bat --color=always {}'"
 
 # export NVM_DIR="$HOME/.nvm"
 # [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
