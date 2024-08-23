@@ -108,6 +108,11 @@ window#waybar {
   color: #2dcc36;
 }
 
+#tray {
+    color: @rosewater;
+    padding-right: 10px;
+}
+
 #pulseaudio {
   color: @peach;
 }
