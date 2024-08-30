@@ -107,6 +107,8 @@ sudo stow nvim
 
 Open your terminal and launch Neovim with the ```nvim``` command.
 
+Setup codeium by typing ```:Codeium Auth``` in your terminal and in the prompt, you will be prompted to enter your codeium api key.
+
 #### Alacritty
 Install alacritty using your distro's package manager:
 
