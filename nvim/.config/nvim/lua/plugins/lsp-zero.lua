@@ -47,6 +47,9 @@ return {
             require('luasnip').lsp_expand(args.body)
           end,
         },
+        sources = {
+          { name = 'codeium' },
+        },
       })
     end
   },
@@ -62,7 +65,7 @@ return {
       { "WhoIsSethDaniel/mason-tool-installer.nvim" },
     },
     config = function()
-      -- This ensures that mason installs the defined linters and formatters 
+      -- This ensures that mason installs the defined linters and formatters
       require("mason-tool-installer").setup({
         ensure_installed = {
           "black",
