@@ -97,6 +97,13 @@ return {
             require('lspconfig')[server_name].setup({})
           end,
 
+          -- this is the "custom handler" for `gleam`
+          gleam_ls = function()
+            -- (Optional) Configure lua language server for neovim
+            local lua_opts = lsp_zero.nvim_lua_ls()
+            require('lspconfig').gleam.setup(lua_opts)
+          end,
+
           -- this is the "custom handler" for `lua_ls`
           lua_ls = function()
             -- (Optional) Configure lua language server for neovim
