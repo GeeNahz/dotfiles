@@ -88,3 +88,4 @@ alias fzf="fzf --height 60% --layout reverse --border -m --bind 'enter:become(vi
 # [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 
 source /usr/share/nvm/init-nvm.sh
+export PATH=/home/geenahz/.cache/rebar3/bin:$PATH
