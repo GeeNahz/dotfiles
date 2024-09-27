@@ -130,8 +130,21 @@ window#waybar {
   color: @green;
 }
 
+@keyframes blink {
+    to {
+        background-color: #ffffff;
+        color: #000000;
+    }
+}
+
+/* Using steps() instead of linear as a timing function to limit cpu usage */
 #battery.warning:not(.charging) {
   color: @rosewater;
+  animation-name: blink;
+  animation-duration: 0.5s;
+  animation-timing-function: steps(12);
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
 }
 
 #battery.critical:not(.charging) {
@@ -146,6 +159,30 @@ window#waybar {
   color: @sky;
   margin-right: 4px;
   margin-left: 4px;
+}
+
+
+#wireplumber {
+    background-color: #fff0f5;
+    color: #000000;
+}
+
+#wireplumber.muted {
+    background-color: #f53c3c;
+}
+
+#custom-media {
+    background-color: #66cc99;
+    color: #2a5c45;
+    min-width: 100px;
+}
+
+#custom-media.custom-spotify {
+    background-color: #66cc99;
+}
+
+#custom-media.custom-vlc {
+    background-color: #ffa000;
 }
 
 /*-----Colors----*/

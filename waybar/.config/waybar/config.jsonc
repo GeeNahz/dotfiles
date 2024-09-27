@@ -7,10 +7,9 @@
     "spacing": 4, // Gaps between modules (4px)
     // Choose the order of the modules
     "modules-left": [
-        "hyprland/workspaces",
-        "hyprland/mode",
-        "hyprland/scratchpad",
-        "custom/media"
+        "hyprland/workspaces"
+    //     "hyprland/mode",
+    //     "hyprland/scratchpad",
     ],
     "modules-center": [
         "hyprland/window"
@@ -28,16 +27,17 @@
         "keyboard-state",
         // "hyprland/language",
         "battery",
-        "battery#bat2",
+        "custom/media",
+        // "battery#bat2",
         "clock",
-        // "custom/power",
-        "tray"
+        "tray",
+        "custom/power"
     ],
     // Modules configuration
-    // "hyprland/workspaces": {
-    //     "disable-scroll": true,
-    //     "all-outputs": true,
-    //     "warp-on-scroll": false,
+    "hyprland/workspaces": {
+        "disable-scroll": true,
+        "all-outputs": true,
+        "warp-on-scroll": false,
     //     "format": "{name}: {icon}",
     //     "format-icons": {
     //         "1": "",
@@ -47,9 +47,10 @@
     //         "5": "",
     //         "urgent": "",
     //         "focused": "",
+    //         "active": "",
     //         "default": ""
     //     }
-    // },
+    },
     "keyboard-state": {
         "numlock": true,
         "capslock": true,
@@ -59,16 +60,16 @@
             "unlocked": ""
         }
     },
-    "hyprland/mode": {
-        "format": "<span style=\"italic\">{}</span>"
-    },
-    "hyprland/scratchpad": {
-        "format": "{icon} {count}",
-        "show-empty": false,
-        "format-icons": ["", ""],
-        "tooltip": true,
-        "tooltip-format": "{app}: {title}"
-    },
+    // "hyprland/mode": {
+    //     "format": "<span style=\"italic\">{}</span>"
+    // },
+    // "hyprland/scratchpad": {
+    //     "format": "{icon} {count}",
+    //     "show-empty": false,
+    //     "format-icons": ["", ""],
+    //     "tooltip": true,
+    //     "tooltip-format": "{app}: {title}"
+    // },
     "mpd": {
         "format": "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}{artist} - {album} - {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S}) ⸨{songPosition}|{queueLength}⸩ {volume}% ",
         "format-disconnected": "Disconnected ",
@@ -139,16 +140,16 @@
         },
         "format": "{capacity}% {icon}",
         "format-full": "{capacity}% {icon}",
-        "format-charging": "{capacity}% ",
+        "format-charging": "{capacity}% ",
         "format-plugged": "{capacity}% ",
         "format-alt": "{time} {icon}",
         // "format-good": "", // An empty format will hide the module
         // "format-full": "",
         "format-icons": ["", "", "", "", ""]
     },
-    "battery#bat2": {
-        "bat": "BAT2"
-    },
+    // "battery#bat2": {
+    //     "bat": "BAT2"
+    // },
     "power-profiles-daemon": {
       "format": "{icon}",
       "tooltip-format": "Power profile: {profile}\nDriver: {driver}",
@@ -197,14 +198,14 @@
             "default": "🎜"
         },
         "escape": true,
-        "exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null" // Script in resources folder
+        "exec": "$HOME/.config/waybar/custom_modules/mediaplayer.py 2> /dev/null" // Script in resources folder
         // "exec": "$HOME/.config/waybar/mediaplayer.py --player spotify 2> /dev/null" // Filter player based on name
     },
     "custom/power": {
         "format" : "⏻ ",
 	"tooltip": false,
 	"menu": "on-click",
-	"menu-file": "$HOME/.config/waybar/power_menu.xml", // Menu file in resources folder
+	"menu-file": "$HOME/.config/waybar/custom_modules/power_menu.xml", // Menu file in resources folder
 	"menu-actions": {
 		"shutdown": "shutdown",
 		"reboot": "reboot",
