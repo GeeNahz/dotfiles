@@ -82,10 +82,12 @@ window#waybar {
 }
 
 #custom-power {
+    color: @subtext0;
+  /* margin: 5px 5px;
   background-color: rgba(0, 119, 179, 0.6);
   border-radius: 100px;
-  margin: 5px 5px;
-  padding: 1px 1px 1px 6px;
+  padding: 1px 1px 1px 1px;
+   */
 }
 
 #cpu {

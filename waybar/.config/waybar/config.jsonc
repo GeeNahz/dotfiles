@@ -34,10 +34,10 @@
         "custom/power"
     ],
     // Modules configuration
-    "hyprland/workspaces": {
-        "disable-scroll": true,
-        "all-outputs": true,
-        "warp-on-scroll": false,
+    // "hyprland/workspaces": {
+        // "disable-scroll": true,
+        // "all-outputs": true,
+        // "warp-on-scroll": false,
     //     "format": "{name}: {icon}",
     //     "format-icons": {
     //         "1": "",
@@ -50,7 +50,7 @@
     //         "active": "",
     //         "default": ""
     //     }
-    },
+    // },
     "keyboard-state": {
         "numlock": true,
         "capslock": true,
