@@ -48,8 +48,8 @@ return {
           end,
         },
         sources = {
-            { name = "nvim_lsp" },
-            { name = "codeium" },
+          { name = "nvim_lsp" },
+          { name = "codeium" },
         },
       })
     end
@@ -71,6 +71,7 @@ return {
         ensure_installed = {
           "black",
           "flake8",
+          "hadolint",
         },
       })
       -- There is an issue with mason-tools-installer running with VeryLazy
