@@ -8,6 +8,10 @@ vim.cmd("set foldlevel=2") -- code fold level
 vim.cmd("set foldlevelstart=0") -- code fold on buffer open
 vim.cmd("set foldnestmax=5") -- limits the maximum number of nested folds
 
+vim.cmd("set cursorline") -- highlight cursor line underneath the cursor horizontally
+vim.cmd("set wildmenu") -- Enable autocompletion menu after pressing <TAB>
+vim.cmd("set wildmode=list:longest") -- Make wildmenu behave like similar to Bash completion
+
 vim.g.background = "light"
 
 vim.opt.encoding = 'utf-8' -- set encoding
