@@ -1,15 +1,15 @@
 # Set up the prompt
 
-autoload -Uz promptinit
-promptinit
-prompt adam1
+# autoload -Uz promptinit -- uncomment
+# promptinit
+# prompt adam1 -- uncomment
 
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
+# if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then -- uncomment
+#   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" -- uncomment
+# fi -- uncomment
 
 # Set the directory we want to store zinit and plugins
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
@@ -24,7 +24,7 @@ fi
 source "${ZINIT_HOME}/zinit.zsh"
 
 # Add in Powerlevel10k
-zinit ice depth=1; zinit light romkatv/powerlevel10k
+# zinit ice depth=1; zinit light romkatv/powerlevel10k -- uncomment
 
 
 
@@ -61,10 +61,6 @@ zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
 zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
 alias stow='sudo STOW_DIR=/usr/local/stow /usr/bin/stow'
 
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
-(( ! ${+functions[p10k]} )) || p10k finalize
 
 export PATH="$PATH:/opt/nvim-linux64/bin"
 
@@ -89,3 +85,15 @@ alias fzf="fzf --height 60% --layout reverse --border -m --bind 'enter:become(vi
 
 source /usr/share/nvm/init-nvm.sh
 export PATH=/home/geenahz/.cache/rebar3/bin:$PATH
+
+# To customize prompt, run `p10k configure` or edit ~/dotfiles/zsh/.p10k.zsh.
+# [[ ! -f ~/dotfiles/zsh/.p10k.zsh ]] || source ~/dotfiles/zsh/.p10k.zsh -- do not uncomment
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh. -- uncomment
+# [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh -- uncomment
+
+# (( ! ${+functions[p10k]} )) || p10k finalize -- uncomment
+
+# starship zsh config setup
+export STARSHIP_CONFIG=~/.config/starship/starship.toml
+eval "$(starship init zsh)"
