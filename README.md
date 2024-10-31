@@ -242,3 +242,24 @@ Using yay, install emote, a modern emoji picker for Linux. Install it from aur
 yay -S emote
 ```
 To select an emoji, the default keyboard shortcut is `Ctrl+Alt+E`. The keybinding for this has already been setup in the hyprland.config file. Ensure to do this for other window managers or display managers.
+
+
+#### Starship
+Install starship using your package manager:
+
+```sh
+yay -S starship
+```
+
+Update the zshrc file to load starship. Paste this at the end of the file if it's not already there:
+
+```sh
+export STARSHIP_CONFIG=~/.config/starship/starship.toml
+eval "$(starship init zsh)"
+```
+
+Setup starship using stow:
+
+```sh
+sudo stow starship
+```
