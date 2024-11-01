@@ -1,15 +1,15 @@
 "$schema" = 'https://starship.rs/config-schema.json'
 
 format = """
-[](mauve)\
+[](surface0)\
 $os\
 $username\
-[](bg:peach fg:mauve)\
+[](bg:peach fg:surface0)\
 $directory\
-[](fg:peach bg:sapphire)\
+[](fg:peach bg:green)\
 $git_branch\
 $git_status\
-[](fg:sapphire bg:blue)\
+[](fg:green bg:blue)\
 $c\
 $rust\
 $golang\
@@ -25,7 +25,11 @@ $conda\
 [](fg:lavender bg:pink)\
 $time\
 [ ](fg:pink)\
-$line_break$character"""
+$line_break$character
+"""
+
+scan_timeout = 20
+command_timeout = 1000
 
 # Sets user-defined palette
 # Palettes must be defined _after_ this line
@@ -75,7 +79,7 @@ crust = "#11111b"
 
 [os]
 disabled = false
-style = "bg:mauve fg:mantle"
+style = "bg:surface0 fg:text"
 
 [os.symbols]
 Windows = "󰍲"
@@ -102,15 +106,16 @@ Pop = ""
 
 [username]
 show_always = true
-style_user = "bg:mauve fg:mantle"
-style_root = "bg:mauve fg:mantle"
+style_user = "bg:surface0 fg:text"
+style_root = "bg:surface0 fg:text"
 format = '[ $user ]($style)'
 
 [directory]
 # style = "fg:color_fg0 bg:color_yellow"
-style = "fg:crust bg:peach"
-format = "[ $path ]($style)"
-truncation_length = 3
+style = "bold fg:crust bg:peach"
+read_only = "🔒"
+format = "[ $path ]($style)($read_only)"
+truncation_length = 8
 truncation_symbol = "…/"
 
 
@@ -125,11 +130,11 @@ truncation_symbol = "…/"
 symbol = ""
 # style = "bg:color_aqua"
 style = "mauve"
-format = '[[ $symbol $branch ](fg:surface0 bg:sapphire)]($style)'
+format = '[[ $symbol $branch ](fg:surface0 bg:green)]($style)'
 
 [git_status]
 style = "bg:sky"
-format = '[[($all_status$ahead_behind )](fg:surface0 bg:sapphire)]($style)'
+format = '[[($all_status$ahead_behind )](fg:surface0 bg:green)]($style)'
 
 [nodejs]
 symbol = ""
