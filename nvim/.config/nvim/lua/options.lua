@@ -4,9 +4,9 @@ vim.cmd("set softtabstop=2")
 vim.cmd("set shiftwidth=2")
 vim.cmd("set relativenumber") -- relative line numbers
 vim.cmd("set foldmethod=indent") -- code fold method 'indent' | 'syntax' | 'marker'
-vim.cmd("set foldlevel=2") -- code fold level
-vim.cmd("set foldlevelstart=0") -- code fold on buffer open
-vim.cmd("set foldnestmax=5") -- limits the maximum number of nested folds
+vim.cmd("set foldlevel=3") -- code fold level
+vim.cmd("set foldlevelstart=3") -- code fold on buffer open
+vim.cmd("set foldnestmax=10") -- limits the maximum number of nested folds
 
 vim.cmd("set cursorline") -- highlight cursor line underneath the cursor horizontally
 vim.cmd("set wildmenu") -- Enable autocompletion menu after pressing <TAB>
