@@ -1,3 +1,5 @@
+if true then return {} end -- this disables the plugin
+
 return {
   'dense-analysis/ale',
   config = function()
