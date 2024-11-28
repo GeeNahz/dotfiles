@@ -11,6 +11,10 @@
 #   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" -- uncomment
 # fi -- uncomment
 
+# -- mac --
+eval "$(/opt/homebrew/bin/brew shellenv)"
+export PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH"
+
 # Set the directory we want to store zinit and plugins
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 
@@ -62,10 +66,14 @@ zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
 alias stow='sudo STOW_DIR=/usr/local/stow /usr/bin/stow'
 
 
-export PATH="$PATH:/opt/nvim-linux64/bin"
+# -- linux --
+# export PATH="$PATH:/opt/nvim-linux64/bin"
 
 # pnpm
-export PNPM_HOME="/home/geenahz/.local/share/pnpm"
+# -- mac --
+export PNPM_HOME="~/.local/share/pnpm"
+# -- linux --
+# export PNPM_HOME="/home/geenahz/.local/share/pnpm"
 case ":$PATH:" in
   *":$PNPM_HOME:"*) ;;
   *) export PATH="$PNPM_HOME:$PATH" ;;
@@ -89,11 +97,21 @@ function y() {
 	rm -f -- "$tmp"
 }
 
+# -- mac --
+export NVM_DIR="$HOME/.nvm"
+  [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
+  [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+
+# -- linux --
 # export NVM_DIR="$HOME/.nvm"
 # [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 
-source /usr/share/nvm/init-nvm.sh
-export PATH=/home/geenahz/.cache/rebar3/bin:$PATH
+# source /usr/share/nvm/init-nvm.sh
+
+# -- mac --
+# export PATH=~/.cache/rebar3/bin:$PATH
+# -- linux --
+# export PATH=/home/geenahz/.cache/rebar3/bin:$PATH
 
 # To customize prompt, run `p10k configure` or edit ~/dotfiles/zsh/.p10k.zsh.
 # [[ ! -f ~/dotfiles/zsh/.p10k.zsh ]] || source ~/dotfiles/zsh/.p10k.zsh -- do not uncomment
