@@ -89,31 +89,33 @@ return {
         lsp_zero.default_keymaps({ buffer = bufnr })
       end)
 
+      local lspconfig = require('lspconfig')
+
       require('mason-lspconfig').setup({
         ensure_installed = { "lua_ls", "cssls", "html", "ts_ls", "tailwindcss", "vuels", "pyright", "pylsp", "ast_grep", "docker_compose_language_service", "dockerls", },
         handlers = {
           -- this first function is the "default handler"
           -- it applies to every language server without a "custom handler"
           function(server_name)
-            require('lspconfig')[server_name].setup({})
+            lspconfig[server_name].setup({})
           end,
 
           -- this is the "custom handler" for `lua_ls`
           lua_ls = function()
             -- (Optional) Configure lua language server for neovim
             local lua_opts = lsp_zero.nvim_lua_ls()
-            require('lspconfig').lua_ls.setup(lua_opts)
+            lspconfig.lua_ls.setup(lua_opts)
           end,
         }
       })
 
-      require('lspconfig').gleam.setup({})
+      lspconfig.gleam.setup({})
 
       -- Python environment
       local util = require('lspconfig/util')
       local path = util.path
-      require('lspconfig').pyright.setup({
-        on_attach = on_attach,
+      local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
+      lspconfig.pyright.setup({
         capabilities = capabilities,
         before_init = function(_, config)
           local default_venv_path = path.join(vim.env.HOME, 'Documents', 'virtualenvs', 'nvim-test', 'bin', 'python3')
