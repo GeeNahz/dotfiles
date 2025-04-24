@@ -2,30 +2,32 @@ vim.cmd("set expandtab") -- convert tabs to spaces
 vim.cmd("set tabstop=2")
 vim.cmd("set softtabstop=2")
 vim.cmd("set shiftwidth=2")
-vim.cmd("set relativenumber") -- relative line numbers
-vim.cmd("set foldmethod=indent") -- code fold method 'indent' | 'syntax' | 'marker'
-vim.cmd("set foldlevel=3") -- code fold level
-vim.cmd("set foldlevelstart=3") -- code fold on buffer open
-vim.cmd("set foldnestmax=10") -- limits the maximum number of nested folds
+vim.cmd("set relativenumber")        -- relative line numbers
+vim.cmd("set foldmethod=indent")     -- code fold method 'indent' | 'syntax' | 'marker'
+vim.cmd("set foldlevel=3")           -- code fold level
+vim.cmd("set foldlevelstart=3")      -- code fold on buffer open
+vim.cmd("set foldnestmax=10")        -- limits the maximum number of nested folds
 
-vim.cmd("set cursorline") -- highlight cursor line underneath the cursor horizontally
-vim.cmd("set wildmenu") -- Enable autocompletion menu after pressing <TAB>
+vim.cmd("set cursorline")            -- highlight cursor line underneath the cursor horizontally
+vim.cmd("set wildmenu")              -- Enable autocompletion menu after pressing <TAB>
 vim.cmd("set wildmode=list:longest") -- Make wildmenu behave like similar to Bash completion
 
 vim.g.background = "light"
 
 vim.opt.encoding = 'utf-8' -- set encoding
 
-vim.opt.ignorecase = true -- ignore case when searching
-vim.opt.smartcase = true -- unless capital letter in search
+vim.opt.ignorecase = true  -- ignore case when searching
+vim.opt.smartcase = true   -- unless capital letter in search
 
-vim.opt.swapfile = false -- disable swapfile
+vim.opt.swapfile = false   -- disable swapfile
 vim.wo.number = true
 
-vim.opt.scrolloff = 8 -- minimum number of lines to keep above and below the cursor
+vim.opt.guicursor = ""    -- make guicursor block. Remove line to restore line cursor
+
+vim.opt.scrolloff = 8     -- minimum number of lines to keep above and below the cursor
 vim.opt.sidescrolloff = 8 -- minimum number of lines to keep above and below the cursor
 
-vim.api.nvim_create_autocmd({'BufNewFile', 'BufRead'}, {
+vim.api.nvim_create_autocmd({ 'BufNewFile', 'BufRead' }, {
   pattern = '*.py',
   callback = function()
     vim.opt.textwidth = 79
@@ -33,8 +35,8 @@ vim.api.nvim_create_autocmd({'BufNewFile', 'BufRead'}, {
   end
 }) -- python formatting
 
-vim.api.nvim_create_autocmd({'BufNewFile', 'BufRead'}, {
-  pattern = {'*.js', '*.ts', '*.html', '*.css', '*.lua', '*.jsx', '*.tsx'},
+vim.api.nvim_create_autocmd({ 'BufNewFile', 'BufRead' }, {
+  pattern = { '*.js', '*.ts', '*.html', '*.css', '*.lua', '*.jsx', '*.tsx' },
   callback = function()
     vim.opt.tabstop = 2
     vim.opt.softtabstop = 2
