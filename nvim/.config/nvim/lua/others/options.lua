@@ -14,23 +14,18 @@ require("bufferline").setup { -- bufferline
       end
       return s
     end,
-    separator_style = "slant",    -- | "slope" | "thick" | "thin" | { 'any', 'any' },
-    enforce_regular_tabs = false, -- | true,
+    separator_style = "thick",    -- | "slant" | "slope" | "thick" | "thin" | { 'any', 'any' },
+    enforce_regular_tabs = false, -- | false | true,
     offsets = {
       {
         filetype = "NvimTree",
         text = "File Explorer",
-        text_align = "center", -- | "left" | "right"
+        text_align = "center", -- | "center" | "left" | "right"
         highlight = "Directory",
         separator = true
       }
     },
-    hover = {
-      enabled = true,
-      delay = 200,
-      reveal = { 'close' }
-    },
-    sort_by = 'insert_at_end', -- | 'insert_after_current' | 'id' | 'extension' | 'relative_directory' | 'directory' | 'tabs'
+    sort_by = 'relative_directory', -- | 'insert_at_end' | 'insert_after_current' | 'id' | 'extension' | 'relative_directory' | 'directory' | 'tabs'
   },
 }
 
