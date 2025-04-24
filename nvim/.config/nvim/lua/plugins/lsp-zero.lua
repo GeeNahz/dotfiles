@@ -118,7 +118,20 @@ return {
       lspconfig.pyright.setup({
         capabilities = capabilities,
         before_init = function(_, config)
-          local default_venv_path = path.join(vim.env.HOME, 'Documents', 'virtualenvs', 'nvim-test', 'bin', 'python3')
+          local project_venv_name = 'nvim-test' -- change to reflect the specific project name
+          local python_path = path.join('bin', 'python3')
+          local venv_name = ''
+
+          if vim.env.VIRTUEL_ENV == nil then
+            venv_name = path.join(vim.env.HOME, 'Documents', 'virtualenvs', project_venv_name)
+          else
+            venv_name = vim.env.VIRTUEL_ENV
+          end
+
+          venv_name = vim.env.VIRTUEL_ENV
+
+          -- local default_venv_path = path.join(vim.env.HOME, 'Documents', 'virtualenvs', 'nvim-test', 'bin', 'python3')
+          local default_venv_path = path.join(venv_name, python_path)
           config.settings.python.pythonPath = default_venv_path
         end
       })
