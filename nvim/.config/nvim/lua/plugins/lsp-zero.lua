@@ -122,13 +122,13 @@ return {
           local python_path = path.join('bin', 'python3')
           local venv_name = ''
 
-          if vim.env.VIRTUEL_ENV == nil then
+          if vim.env.VIRTUAL_ENV == nil then
             venv_name = path.join(vim.env.HOME, 'Documents', 'virtualenvs', project_venv_name)
           else
-            venv_name = vim.env.VIRTUEL_ENV
+            venv_name = vim.env.VIRTUAL_ENV
           end
 
-          venv_name = vim.env.VIRTUEL_ENV
+          venv_name = vim.env.VIRTUAL_ENV
 
           -- local default_venv_path = path.join(vim.env.HOME, 'Documents', 'virtualenvs', 'nvim-test', 'bin', 'python3')
           local default_venv_path = path.join(venv_name, python_path)
