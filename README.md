@@ -10,31 +10,31 @@ Ensure you have the following installed on your system:
 
 #### Git
 
-```
+```bash
 sudo pacman -S git
 ```
 
 #### Stow
 
-```
+```bash
 sudo pacman -S stow
 ```
 
 #### gcc
 
-```
+```bash
 sudo pacman -S gcc
 ```
 
 #### ripgrep
 
-```
+```bash
 sudo pacman -S ripgrep
 ```
 
 #### node and npm
 
-```
+```bash
 sudo pacman -S nodejs npm
 ```
 
@@ -42,7 +42,7 @@ sudo pacman -S nodejs npm
 
 First, check out the dotfiles repo in your $HOME directory using git:
 
-```
+```bash
 git clone git@github.com:GeeNahz/dotfiles.git ~/dotfiles
 ```
 
@@ -56,25 +56,25 @@ git clone git@github.com:GeeNahz/dotfiles.git ~/dotfiles
 #### Fonts
 Create symlinks to the tmux configuration file:
 
-```
+```bash
 sudo stow fonts
 ```
 
 #### Zsh
 Install zsh using your distro's package manager:
 
-```
+```bash
 sudo pacman -S zsh
 ```
 
 Make zsh the default shell:
-```
+```bash
 sudo chsh -s $(which zsh)
 ```
 
 Use stow to create symlinks for zsh files:
 
-```
+```bash
 sudo stow zsh
 ```
 
@@ -83,7 +83,7 @@ sudo stow zsh
 
 > [!CAUTION]
 >Note: Use this with caution as this will overwrite any existing files. Ensure you back up any conflicting files first. 
->```
+>```bash
 >stow --adopt zsh
 >```
 
@@ -95,13 +95,13 @@ Install neovim with version >= v0.9.5 using your distro's package manager. If th
 > [!IMPORTANT]
 > Before installing Neovim, ensure you have a C compiler, Node, Npm, and a Nerd font installed. I personally use Jetbrains Mono which is the font in the fonts dotfiles above.
 
-```
+```bash
 sudo pacman -S nvim
 ```
 
 Use stow to create symlinks for the neovim config files:
 
-```
+```bash
 sudo stow nvim
 ```
 
@@ -112,27 +112,27 @@ Setup codeium by typing ```:Codeium Auth``` in your terminal and in the prompt, 
 #### Alacritty
 Install alacritty using your distro's package manager:
 
-```
+```bash
 sudo pacman -S alacritty
 ```
 If it's not available in your package manager repository, visit alacritty's [official website](https://alacritty.org/) to find out how to install it for your distro.
 
 Create symlinks to the alacritty configuration files:
 
-```
+```bash
 sudo stow alacritty
 ```
 
 #### Tmux
 Install tmux using your distro's package manager:
 
-```
+```bash
 sudo pacman -S tmux
 ```
 
 Create symlinks to the tmux configuration file:
 
-```
+```bash
 sudo stow tmux
 ```
 
@@ -140,24 +140,39 @@ Open your terminal and launch tmux by typing ```tmux```.
 
 Clone the Tmux Plugin Manager (tpm):
 
-```
+```bash
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 ```
 
 Restart tmux and press ```prefix``` + <kbd>I</kbd> to fetch the defined plugins.
+
+[!NOTE] To setup catppuccin with tmux, follow these instructions
+
+```bash
+mkdir -p ~/.tmux/plugins/catppuccin
+git clone -b v2.1.3 https://github.com/catppuccin/tmux.git ~/.tmux/plugins/catppuccin/tmux
+```
+The add this to your `~/.tmux.conf` file.
+
+```bash
+set -g @catppuccin_flavor '<flavour>' # | mocha | frappe | latte | macchiato 
+
+run ~/.tmux/plugins/catppuccin/tmux/catppuccin.tmux
+```
+
 
 #### i3
 i3 is a Window Manager.
 
 Install it using the i3-wm package manager.
 
-```sh
+```bash
 sudo pacman -S i3-wm
 ```
 
 And as usual, symlink the config file from the dotfiles dir.
 
-```sh
+```bash
 sudo stow i3
 ```
 
@@ -165,13 +180,13 @@ sudo stow i3
 Picom is a window compositor for Window Managers (e.g. i3) that do not provide compositing. Essentially, it helps to prevent screen tearing while switching i3 windows.
 
 Install picom using your package manager repository
-```sh
+```bash
 sudo pacman -S picom
 ```
 
 Create symlink using stow
 
-```sh
+```bash
 sudo stow picom
 ```
 
@@ -179,13 +194,13 @@ sudo stow picom
 Polybar is a nice, highly customizable status bar for desktop environment. And it's really easy to setup too. I used a pre-defined theme but feel free to customize yours however you feel like.
 
 Install Polybar
-```sh
+```bash
 sudo pacman -S polybar
 ```
 
 Create the configuration file using stow
 
-```sh
+```bash
 sudo stow polybar
 ```
 
@@ -196,7 +211,7 @@ To setup background on the i3 window manager, I use feh, a lightweight image vie
 
 But first, use stow to symlink the image in the backgrounds dir which will create a backgrounds symlink within ```~/.config/```. Feel free to put your own desired wallpaper there.
 
-```sh
+```bash
 sudo stow backgrounds
 ```
 
@@ -204,7 +219,7 @@ Next, go ahead and install feh.
 > [!NOTE]
 > I use an AUR package called ```yay``` in arch linux so check to ensure it is available in your package manager's repo or check [here](https://feh.finalrewind.org/) for download instructions.
 
-```sh
+```bash
 sudo yay -S feh
 ```
 
@@ -223,12 +238,12 @@ Install rofi.
 > [!NOTE]
 > Again, I use ```yay``` to install this package.
 
-```sh
+```bash
 sudo yay -S rofi
 ```
 
 Setup the config using stow
-```sh
+```bash
 sudo stow rofi
 ```
 
@@ -238,7 +253,7 @@ I have the configurations setup for rofi in i3 config by binding rofi to <span s
 #### Emoji
 Using yay, install emote, a modern emoji picker for Linux. Install it from aur
 
-```sh
+```bash
 yay -S emote
 ```
 To select an emoji, the default keyboard shortcut is `Ctrl+Alt+E`. The keybinding for this has already been setup in the hyprland.config file. Ensure to do this for other window managers or display managers.
@@ -247,19 +262,19 @@ To select an emoji, the default keyboard shortcut is `Ctrl+Alt+E`. The keybindin
 #### Starship
 Install starship using your package manager:
 
-```sh
+```bash
 yay -S starship
 ```
 
 Update the zshrc file to load starship. Paste this at the end of the file if it's not already there:
 
-```sh
+```bash
 export STARSHIP_CONFIG=~/.config/starship/starship.toml
 eval "$(starship init zsh)"
 ```
 
 Setup starship using stow:
 
-```sh
+```bash
 sudo stow starship
 ```
