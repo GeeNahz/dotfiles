@@ -25,7 +25,7 @@ require("bufferline").setup { -- bufferline
         separator = true
       }
     },
-    sort_by = 'relative_directory', -- | 'insert_at_end' | 'insert_after_current' | 'id' | 'extension' | 'relative_directory' | 'directory' | 'tabs'
+    sort_by = 'insert_at_end', -- | 'insert_at_end' | 'insert_after_current' | 'id' | 'extension' | 'relative_directory' | 'directory' | 'tabs'
   },
 }
 
