@@ -146,7 +146,8 @@ git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
 Restart tmux and press ```prefix``` + <kbd>I</kbd> to fetch the defined plugins.
 
-[!NOTE] To setup catppuccin with tmux, follow these instructions
+> [!NOTE]
+> To setup catppuccin with tmux, follow these instructions
 
 ```bash
 mkdir -p ~/.tmux/plugins/catppuccin
