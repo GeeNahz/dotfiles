@@ -124,3 +124,38 @@ export NVM_DIR="$HOME/.nvm"
 # starship zsh config setup
 export STARSHIP_CONFIG=~/.config/starship/starship.toml
 eval "$(starship init zsh)"
+
+
+# kitty
+export KITTY_CONFIG_DIRECTORY=~/.config/kitty
+
+# bun completions
+[ -s "/Users/geenahz/.bun/_bun" ] && source "/Users/geenahz/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+
+
+# git aliases
+alias gstat="git status"
+alias glogs="git log --oneline"
+# git aliases via functions
+function gadd() {
+    git add $*
+}
+function gcommit() {
+    git commit -m $1
+}
+function gdiff() {
+    git diff $*
+}
+function gswitch() {
+    git checkout $*
+}
+function grb() {
+    git rebase $*
+}
+function grbi() {
+    git rebase --interactive $*
+}
