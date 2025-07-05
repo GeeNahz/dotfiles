@@ -13,6 +13,7 @@ vim.keymap.set('n', '<leader>h', ':nohlsearch<CR>')
 vim.keymap.set('n', '<leader>n', ':bn<CR>')
 vim.keymap.set('n', '<leader>p', ':bp<CR>')
 vim.keymap.set('n', '<leader>x', ':bd<CR>')
+vim.keymap.set('n', '<leader>X', ':bufdo :bd<CR>')
 
 -- yank to clipboard
 vim.keymap.set({'n', 'v'}, '<leader>y', [["+y]])
