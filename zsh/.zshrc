@@ -142,20 +142,32 @@ alias gstat="git status"
 alias glogs="git log --oneline"
 # git aliases via functions
 function gadd() {
-    git add $*
+  git add $*
 }
 function gcommit() {
-    git commit -m $1
+  git commit -m $1
 }
 function gdiff() {
-    git diff $*
+  git diff $*
 }
 function gswitch() {
-    git checkout $*
+  git checkout $*
 }
 function grb() {
-    git rebase $*
+  git rebase $*
 }
 function grbi() {
-    git rebase --interactive $*
+  git rebase --interactive $*
+}
+function grst() {
+  git restore $*
+}
+function grsts() {
+  git restore --staged $*
+}
+function gpush() {
+  git push $*
+}
+function gpull() {
+  git pull $*
 }
