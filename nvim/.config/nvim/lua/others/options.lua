@@ -33,3 +33,15 @@ require("bufferline").setup { -- bufferline
 --   local icon = level:match("error") and " " or " "
 --   return " " .. icon .. count
 -- end,
+
+-- diagnostics config
+vim.diagnostic.config({
+  -- float,
+  -- jump,
+  -- signs,
+  underline = true,
+  virtual_text = true,
+  update_in_insert = true,
+  severity_sort = false,
+  virtual_lines = false,
+})
