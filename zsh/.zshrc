@@ -140,6 +140,7 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 # git aliases
 alias gstat="git status"
 alias glogs="git log --oneline"
+alias gitp="git push"
 # git aliases via functions
 function gadd() {
   git add $*
