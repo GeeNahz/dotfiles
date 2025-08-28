@@ -13,6 +13,11 @@ return {
   {
     'williamboman/mason.nvim',
     lazy = false,
+    -- dependencies newly added
+    -- dependencies = {
+    --   'neovim/nvim-lspconfig',
+    --   'williamboman/mason-lspconfig.nvim',
+    -- },
     config = true,
   },
 
