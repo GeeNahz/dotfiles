@@ -4,7 +4,7 @@ vim.cmd("set softtabstop=2")
 vim.cmd("set shiftwidth=2")
 vim.cmd("set relativenumber")        -- relative line numbers
 vim.cmd("set foldmethod=indent")     -- code fold method 'indent' | 'syntax' | 'marker'
-vim.cmd("set foldlevel=3")           -- code fold level
+vim.cmd("set foldlevel=7")           -- code fold level
 vim.cmd("set foldlevelstart=3")      -- code fold on buffer open
 vim.cmd("set foldnestmax=10")        -- limits the maximum number of nested folds
 
@@ -22,10 +22,11 @@ vim.opt.smartcase = true   -- unless capital letter in search
 vim.opt.swapfile = false   -- disable swapfile
 vim.wo.number = true
 
-vim.opt.guicursor = ""    -- make guicursor block. Remove line to restore line cursor
+-- vim.opt.guicursor = ""    -- make guicursor block. Remove line to restore line cursor
+vim.opt.guicursor = "n-v-c-i:block" -- make guicursor block. Remove line to restore line cursor
 
-vim.opt.scrolloff = 8     -- minimum number of lines to keep above and below the cursor
-vim.opt.sidescrolloff = 8 -- minimum number of lines to keep above and below the cursor
+vim.opt.scrolloff = 8               -- minimum number of lines to keep above and below the cursor
+vim.opt.sidescrolloff = 8           -- minimum number of lines to keep above and below the cursor
 
 vim.api.nvim_create_autocmd({ 'BufNewFile', 'BufRead' }, {
   pattern = '*.py',
