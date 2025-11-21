@@ -2,7 +2,7 @@
 "$schema" = 'https://starship.rs/config-schema.json'
 
 # Wait 10 milliseconds for starship to check files under the current directory.
-scan_timeout = 10
+scan_timeout = 10000
 command_timeout = 100000000
 
 # Inserts a blank line between shell prompts
