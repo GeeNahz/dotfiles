@@ -94,7 +94,7 @@ return {
         lsp_zero.default_keymaps({ buffer = bufnr })
       end)
 
-      local lspconfig = require('lspconfig')
+      -- local lspconfig = require('lspconfig')
 
       require('mason-lspconfig').setup({
         ensure_installed = { "lua_ls", "cssls", "html", "ts_ls", "tailwindcss", "vuels", "pyright", "pylsp", "ast_grep", "docker_compose_language_service", "dockerls", },
@@ -102,25 +102,28 @@ return {
           -- this first function is the "default handler"
           -- it applies to every language server without a "custom handler"
           function(server_name)
-            lspconfig[server_name].setup({})
+            -- lspconfig[server_name].setup({})
+            vim.lsp.config(server_name, {})
           end,
 
           -- this is the "custom handler" for `lua_ls`
           lua_ls = function()
             -- (Optional) Configure lua language server for neovim
             local lua_opts = lsp_zero.nvim_lua_ls()
-            lspconfig.lua_ls.setup(lua_opts)
+            -- lspconfig.lua_ls.setup(lua_opts)
+            vim.lsp.config("lua_ls", lua_opts)
           end,
         }
       })
 
-      lspconfig.gleam.setup({})
+      -- lspconfig.gleam.setup({})
+      vim.lsp.config("gleam", {})
 
       -- Python environment
       local util = require('lspconfig/util')
       local path = util.path
       local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
-      lspconfig.pyright.setup({
+      vim.lsp.config("pyright", {
         capabilities = capabilities,
         before_init = function(_, config)
           local project_venv_name = 'nvim-test' -- change to reflect the specific project name
@@ -140,6 +143,26 @@ return {
           config.settings.python.pythonPath = default_venv_path
         end
       })
+      -- lspconfig.pyright.setup({
+      --   capabilities = capabilities,
+      --   before_init = function(_, config)
+      --     local project_venv_name = 'nvim-test' -- change to reflect the specific project name
+      --     local python_path = path.join('bin', 'python3')
+      --     local venv_name = ''
+      --
+      --     if vim.env.VIRTUAL_ENV == nil then
+      --       venv_name = path.join(vim.env.HOME, 'Documents', 'virtualenvs', project_venv_name)
+      --     else
+      --       venv_name = vim.env.VIRTUAL_ENV
+      --     end
+      --
+      --     venv_name = vim.env.VIRTUAL_ENV
+      --
+      --     -- local default_venv_path = path.join(vim.env.HOME, 'Documents', 'virtualenvs', 'nvim-test', 'bin', 'python3')
+      --     local default_venv_path = path.join(venv_name, python_path)
+      --     config.settings.python.pythonPath = default_venv_path
+      --   end
+      -- })
     end
   }
 }
