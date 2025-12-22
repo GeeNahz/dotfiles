@@ -97,7 +97,7 @@ return {
       -- local lspconfig = require('lspconfig')
 
       require('mason-lspconfig').setup({
-        ensure_installed = { "lua_ls", "cssls", "html", "ts_ls", "tailwindcss", "vuels", "pyright", "pylsp", "ast_grep", "docker_compose_language_service", "dockerls", },
+        ensure_installed = { "lua_ls", "cssls", "html", "ts_ls", "tailwindcss", "vuels", "pyright", "pylsp", "ast_grep", "docker_compose_language_service", "dockerls", "elixirls", },
         handlers = {
           -- this first function is the "default handler"
           -- it applies to every language server without a "custom handler"
