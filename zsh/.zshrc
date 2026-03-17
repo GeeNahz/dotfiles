@@ -1,48 +1,68 @@
+# ===============
 # Set up the prompt
+# ===============
 
 # autoload -Uz promptinit -- uncomment
 # promptinit
 # prompt adam1 -- uncomment
 
+# ===============
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
 # if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then -- uncomment
 #   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" -- uncomment
 # fi -- uncomment
+# ===============
 
+# ===============
 # -- mac --
+# ===============
 eval "$(/opt/homebrew/bin/brew shellenv)"
 export PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH"
 
+# ===============
 # Set the directory we want to store zinit and plugins
+# ===============
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 
+# ===============
 # Download Zinit, if it's not there
+# ===============
 if [ ! -d "$ZINIT_HOME" ]; then
   mkdir -p "$(dirname $ZINIT_HOME)"
   git clone git@github.com:zdharma-continuum/zinit.git "$ZINIT_HOME"
 fi
 
+# ===============
 # Source/Load zinit
+# ===============
 source "${ZINIT_HOME}/zinit.zsh"
 
+# ===============
 # Add in Powerlevel10k
+# ===============
 # zinit ice depth=1; zinit light romkatv/powerlevel10k -- uncomment
 
 
 
 setopt histignorealldups sharehistory
 
+# ===============
 # Use emacs keybindings even if our EDITOR is set to vi
+# ===============
 bindkey -e
 
+# ===============
 # Keep 1000 lines of history within the shell and save it to ~/.zsh_history:
+# ===============
 HISTSIZE=1000
 SAVEHIST=1000
 HISTFILE=~/.zsh_history
 
+# ===============
 # Use modern completion system
+# ===============
 autoload -Uz compinit
 compinit
 
@@ -69,7 +89,9 @@ alias stow='sudo STOW_DIR=/usr/local/stow /usr/bin/stow'
 # -- linux --
 # export PATH="$PATH:/opt/nvim-linux64/bin"
 
+# ===============
 # pnpm
+# ===============
 # -- mac --
 export PNPM_HOME="~/.local/share/pnpm"
 # -- linux --
@@ -83,7 +105,9 @@ esac
 alias ls='ls --color=auto'
 alias grep='grep --color=auto'
 
+# ===============
 # Set up fzf key bindings and fuzzy completion
+# ===============
 source <(fzf --zsh)
 
 alias fzf="fzf --height 60% --layout reverse --border -m --bind 'enter:become(vim {})' --preview 'bat --color=always {}'"
@@ -121,23 +145,39 @@ export NVM_DIR="$HOME/.nvm"
 
 # (( ! ${+functions[p10k]} )) || p10k finalize -- uncomment
 
+# ===============
 # starship zsh config setup
+# ===============
 export STARSHIP_CONFIG=~/.config/starship/starship.toml
 eval "$(starship init zsh)"
 
 
+# ===============
 # kitty
+# ===============
 export KITTY_CONFIG_DIRECTORY=~/.config/kitty
 
+# ===============
 # bun completions
 [ -s "/Users/geenahz/.bun/_bun" ] && source "/Users/geenahz/.bun/_bun"
-
+# ===============
 # bun
+# ===============
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 
+# ===============
+# asdf
+# ===============
+export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
+# append completions to fpath
+fpath=(${ASDF_DATA_DIR:-$HOME/.asdf}/completions $fpath)
+# initialise completions with ZSH's compinit
+autoload -Uz compinit && compinit
 
+# ===============
 # git aliases
+# ===============
 alias gstat="git status"
 alias glogs="git log --oneline"
 alias gitp="git push"
