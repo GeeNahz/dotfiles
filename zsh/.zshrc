@@ -83,6 +83,12 @@ zstyle ':completion:*' verbose true
 
 zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
 zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
+# zsh autosuggestions
+source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+# zsh syntax highlighting
+source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+# stow
 alias stow='sudo STOW_DIR=/usr/local/stow /usr/bin/stow /opt/homebrew/bin/stow'
 
 
