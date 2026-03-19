@@ -82,12 +82,22 @@ sudo stow zsh
 > At times doing this fails especially when the files already exists. To enforce the changes (applicable to every stow command here), use the ```--adopt``` flag.
 
 > [!CAUTION]
->Note: Use this with caution as this will overwrite any existing files. Ensure you back up any conflicting files first. 
->```bash
->stow --adopt zsh
->```
+> Note: Use this with caution as this will overwrite any existing files. Ensure you back up any conflicting files first. 
+> ```bash
+> stow --adopt zsh
+> ```
 
-Restart the terminal to start using zsh.
+To enable zsh syntax highlighting, install the zsh-syntax-highlighting package using your distro's package manager.
+```zsh
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.zsh/zsh-syntax-highlighting
+```
+
+To enable zsh autosuggestions, install the zsh-autosuggestions package using your distro's package manager.
+```zsh
+git clone https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosuggestions
+```
+
+Finally, restart the terminal to start using zsh.
 
 #### Neovim
 Install neovim with version >= v0.9.5 using your distro's package manager. If the package manager repository does not have the latest version, you can get the latest version (for most Linux package) from an [AppImage](https://github.com/neovim/neovim/blob/master/INSTALL.md#appimage-universal-linux-package) in their GitHub repo.
