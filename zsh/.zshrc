@@ -218,3 +218,4 @@ function gpush() {
 function gpull() {
   git pull $*
 }
+export PATH="$HOME/.local/bin:$PATH"
