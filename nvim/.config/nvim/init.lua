@@ -1,13 +1,13 @@
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
-  vim.fn.system({
-    "git",
-    "clone",
-    "--filter=blob:none",
-    "https://github.com/folke/lazy.nvim.git",
-    "--branch=stable", -- latest stable release
-    lazypath,
-  })
+	vim.fn.system({
+		"git",
+		"clone",
+		"--filter=blob:none",
+		"https://github.com/folke/lazy.nvim.git",
+		"--branch=stable", -- latest stable release
+		lazypath,
+	})
 end
 vim.opt.rtp:prepend(lazypath)
 
@@ -16,5 +16,12 @@ local opts = {}
 require("keymaps")
 require("options")
 require("others.keymaps")
-require("lazy").setup("plugins")
+require("lazy").setup("plugins", {
+	git = {
+		timeout = 300, -- Increase from default 120 to 300 seconds
+	},
+	install = {
+		missing = true,
+	},
+})
 require("others.options")
