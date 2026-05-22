@@ -97,16 +97,26 @@ alias stow='sudo STOW_DIR=/usr/local/stow /usr/bin/stow /opt/homebrew/bin/stow'
 
 # ===============
 # pnpm
-# ===============
-# -- mac --
-export PNPM_HOME="~/.local/share/pnpm"
-# -- linux --
-# export PNPM_HOME="/home/geenahz/.local/share/pnpm"
+export PNPM_HOME="/Users/devontechsys1/.local/share/pnpm"
 case ":$PATH:" in
-  *":$PNPM_HOME:"*) ;;
-  *) export PATH="$PNPM_HOME:$PATH" ;;
+  *":$PNPM_HOME/bin:"*) ;;
+  *) export PATH="$PNPM_HOME/bin:$PATH" ;;
 esac
 # pnpm end
+
+# ===============
+# pnpm
+# ===============
+# -- mac --
+# export PNPM_HOME="~/.local/share/pnpm"
+# -- linux --
+# export PNPM_HOME="/home/geenahz/.local/share/pnpm"
+# case ":$PATH:" in
+#   *":$PNPM_HOME:"*) ;;
+#   *) export PATH="$PNPM_HOME:$PATH" ;;
+# esac
+# pnpm end
+
 
 alias ls='ls --color=auto'
 alias grep='grep --color=auto'
@@ -219,3 +229,14 @@ function gpull() {
   git pull $*
 }
 export PATH="$HOME/.local/bin:$PATH"
+
+
+alias claude_jai_fe="claude --resume 51c4e8c2-e612-4a9a-9f78-8e3b3f57c11f"
+alias claude_ms_be="claude --resume 45e8b66b-4545-4596-bc6b-f3534ee13ca7"
+alias claude_ms_fe="claude --resume 3863303a-2b4a-414f-8955-2fa61ff7dfa5"
+alias claude_budeshi_fe="claude --resume 51ffa98b-2dd0-430b-8cff-420ff35af546"
+alias claude_budeshi_be="claude --resume 9040293d-19f4-41c4-9675-dd85c1f116dd"
+alias claude_aforlink_fe="claude --resume bdd58cba-a108-43ba-909a-d10e56357448"
+alias claude_aforlink_be="claude --resume db53eee6-a171-4a3a-b20a-27441810de11"
+alias claude_iths_fe="claude --resume bd4427e5-2516-4a74-bd9c-21d4a16d6b30"
+alias claude_devend="claude --resume fa69e2fa-c072-46ad-81e8-136758eee115"
