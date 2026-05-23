@@ -102,18 +102,24 @@ setup_zsh_plugins() {
   step "Setting up Zsh plugins"
   mkdir -p "$HOME/.zsh"
 
-  declare -A plugins=(
-    [zsh-autosuggestions]="https://github.com/zsh-users/zsh-autosuggestions"
-    [zsh-syntax-highlighting]="https://github.com/zsh-users/zsh-syntax-highlighting"
+  # Parallel arrays (bash 3.2 compat — no declare -A)
+  local plugin_names=(zsh-autosuggestions zsh-syntax-highlighting)
+  local plugin_urls=(
+    "https://github.com/zsh-users/zsh-autosuggestions"
+    "https://github.com/zsh-users/zsh-syntax-highlighting"
   )
-  for name in "${!plugins[@]}"; do
+
+  local i
+  for (( i=0; i<${#plugin_names[@]}; i++ )); do
+    local name="${plugin_names[$i]}"
+    local url="${plugin_urls[$i]}"
     local target="$HOME/.zsh/$name"
     if [[ -d "$target" && -n "$(ls -A "$target" 2>/dev/null)" ]]; then
       info "$name already present"
     else
       [[ -d "$target" ]] && rm -rf "$target"   # remove empty stub from a prior stow run
       info "Cloning $name..."
-      git clone "${plugins[$name]}" "$target"
+      git clone "$url" "$target"
       ok "$name"
     fi
   done
@@ -254,7 +260,7 @@ _safe_stow() {
     # stow prints: "existing target is neither a link nor empty: <relative-path>"
     while IFS= read -r line; do
       local rel_path
-      rel_path=$(printf '%s' "$line" | grep -oP '(?<=: ).+$' || true)
+      rel_path=$(printf '%s' "$line" | sed 's/.*: //' || true)
       [[ -z "$rel_path" ]] && continue
       local full_path="$HOME/$rel_path"
       if [[ -e "$full_path" && ! -L "$full_path" ]]; then
