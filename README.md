@@ -1,291 +1,145 @@
-# My dotfiles
+# dotfiles
 
-This directory contains some of my dotfile configurations.
+Personal dotfiles for Arch Linux (Hyprland) and macOS, managed with [GNU Stow](https://www.gnu.org/software/stow/).
 
-## Requirements
+---
 
-Ensure you have the following installed on your system:
-> [!NOTE]
-> Some commands used here are perculiar to Arch Linux (btw). Please refer to the commands that are perculiar to your Linux/Unix distro in case of any conflict.
-
-#### Git
-
-```bash
-sudo pacman -S git
-```
-
-#### Stow
-
-```bash
-sudo pacman -S stow
-```
-
-#### gcc
-
-```bash
-sudo pacman -S gcc
-```
-
-#### ripgrep
-
-```bash
-sudo pacman -S ripgrep
-```
-
-#### node and npm
-
-```bash
-sudo pacman -S nodejs npm
-```
-
-## Download
-
-First, check out the dotfiles repo in your $HOME directory using git:
+## Quick start
 
 ```bash
 git clone git@github.com:GeeNahz/dotfiles.git ~/dotfiles
+cd ~/dotfiles
+bash install_dev_setup.sh
 ```
 
-## Setup
+The script detects your OS, installs packages, sets up tooling, and symlinks configs. It prompts for your password where `sudo` is needed (package installs, `/etc/shells`). The stow step itself is fully user-space.
 
-> [!NOTE]
-> All commands here will be executed from the ```~/dotfiles``` dir.
-> Ensure to ```cd ~/dotfiles``` before proceeding.
+> **Re-running is safe.** Every step checks whether it's already done before acting.
 
-> I have remapped my navigations (<kbd>←</kbd> <kbd>↑</kbd> <kbd>↓</kbd> <kbd>→</kbd>) for i3, nvim, tmux, and I think alacritty to mirror that of vim motions key (<kbd>h</kbd> <kbd>j</kbd> <kbd>k</kbd> <kbd>l</kbd>) respectively.
-#### Fonts
-Create symlinks to the tmux configuration file:
+---
+
+## What's included
+
+| Package      | Arch Linux | macOS | Notes |
+|--------------|:---:|:---:|-------|
+| `zsh`        | ✓ | ✓ | zinit, autosuggestions, syntax-highlighting |
+| `starship`   | ✓ | ✓ | prompt — custom config in `starship/` |
+| `nvim`       | ✓ | ✓ | lazy.nvim, LSP, Codeium, Catppuccin |
+| `vim`        | ✓ | ✓ | vim-plug, NERDTree, ALE, Catppuccin |
+| `tmux`       | ✓ | ✓ | TPM, catppuccin theme (v2.1.3), vim-navigator |
+| `kitty`      | ✓ | ✓ | Catppuccin Mocha theme, JetBrains Mono |
+| `yazi`       | ✓ | ✓ | file manager, Catppuccin Mocha theme |
+| `fonts`      | ✓ | ✓ | JetBrainsMono Nerd Font, MesloLGS NF |
+| `backgrounds`| ✓ | ✓ | wallpapers → `~/.config/backgrounds/` |
+| `hypr`       | ✓ | — | Hyprland, Hyprlock, Hyprpaper |
+| `hyprland-rofi` | ✓ | — | Rofi config for Hyprland |
+| `waybar`     | ✓ | — | status bar, Catppuccin Mocha |
+
+### Languages (installed via asdf)
+
+Node.js · Python · Erlang · Elixir
+
+---
+
+## Directory structure
+
+```
+dotfiles/
+├── install_dev_setup.sh   ← main setup script
+│
+├── zsh/                   .zshrc, .zsh/ (plugin stubs)
+├── starship/              .config/starship/starship.toml
+├── nvim/                  .config/nvim/ (lazy.nvim setup)
+├── vim/                   .vimrc, .vim/ (vim-plug setup)
+├── tmux/                  .tmux.conf
+├── kitty/                 .config/kitty/kitty.conf
+├── yazi/                  .config/yazi/
+├── fonts/                 .fonts/ (TTF files)
+├── backgrounds/           .config/backgrounds/ (wallpapers)
+├── hypr/                  .config/hypr/ (Hyprland configs)
+├── hyprland-rofi/         .config/rofi/ (Rofi for Hyprland)
+└── waybar/                .config/waybar/
+```
+
+**Archived / not stowed** (kept for reference):
+
+| Directory | Reason archived |
+|-----------|-----------------|
+| `alacritty/` | Replaced by kitty |
+| `i3/`, `picom/`, `polybar/`, `rofi/`, `wofi/` | Replaced by Hyprland stack |
+| `nvim_v1/`, `nvim.v11/` | Old nvim configs |
+| `zsh.old/` | Old p10k-based zsh config |
+
+---
+
+## What the install script does
+
+1. **Detects OS** — Arch Linux or macOS
+2. **Installs packages**
+   - Arch: `pacman` + `yay` (AUR) — installs Hyprland, waybar, rofi, kitty, nvim, tmux, fzf, bat, ripgrep, starship, yazi, and Erlang build deps
+   - macOS: Homebrew — installs nvim, tmux, fzf, bat, ripgrep, starship, yazi, kitty (cask), and Erlang build deps
+3. **Clones Zsh plugins** to `~/.zsh/` (must happen before stow so stub dirs aren't symlinked empty)
+4. **Installs Tmux Plugin Manager** + catppuccin theme to `~/.tmux/plugins/`
+5. **Installs vim-plug** to `~/.vim/autoload/`
+6. **Downloads Kitty Catppuccin Mocha theme** to `~/.config/kitty/current-theme.conf`
+7. **Installs asdf** (language version manager) via git
+8. **Installs languages via asdf**: Node.js, Python, Erlang, Elixir — sets each as global default
+9. **Stows dotfiles** — creates symlinks in `$HOME` for all active packages; backs up any conflicting files as `<file>.bak`
+10. **Sets up fonts** — Linux: runs `fc-cache`; macOS: copies TTFs to `~/Library/Fonts/`
+11. **Changes default shell** to zsh (registers it in `/etc/shells` if needed)
+
+---
+
+## Post-install
+
+After the script finishes and you restart your terminal:
+
+```
+# Install tmux plugins
+tmux  →  <prefix> + I
+
+# Neovim plugins (auto-installs on first launch)
+nvim
+
+# Authenticate Codeium AI completion
+nvim  →  :Codeium Auth
+
+# Arch only: apply Hyprland configs
+Log out → log back in  (or: hyprctl reload)
+```
+
+---
+
+## Manual stow (individual packages)
+
+Run from `~/dotfiles`:
 
 ```bash
-sudo stow fonts
+stow <package-name>          # symlink to ~/
+stow --restow <package>      # re-create symlinks (e.g. after moving files)
+stow --delete <package>      # remove symlinks
 ```
 
-#### Zsh
-Install zsh using your distro's package manager:
+Force-stow when a conflicting file already exists (the install script does this automatically):
 
 ```bash
-sudo pacman -S zsh
+# Back up the conflicting file first, then stow
+mv ~/.zshrc ~/.zshrc.bak
+stow zsh
 ```
 
-Make zsh the default shell:
-```bash
-sudo chsh -s $(which zsh)
-```
+---
 
-Use stow to create symlinks for zsh files:
+## Stow — no sudo required
 
-```bash
-sudo stow zsh
-```
+Stow symlinks everything into your home directory, so it never needs elevated privileges. The old `sudo stow` pattern in the README (and the zshrc alias) is only relevant if stowing into system paths like `/usr/local/stow` — which we don't do here.
 
-> [!IMPORTANT]
-> At times doing this fails especially when the files already exists. To enforce the changes (applicable to every stow command here), use the ```--adopt``` flag.
+---
 
-> [!CAUTION]
-> Note: Use this with caution as this will overwrite any existing files. Ensure you back up any conflicting files first. 
-> ```bash
-> stow --adopt zsh
-> ```
+## Notes
 
-To enable zsh syntax highlighting, install the zsh-syntax-highlighting package using your distro's package manager.
-```zsh
-git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.zsh/zsh-syntax-highlighting
-```
-
-To enable zsh autosuggestions, install the zsh-autosuggestions package using your distro's package manager.
-```zsh
-git clone https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosuggestions
-```
-
-Finally, restart the terminal to start using zsh.
-
-#### Neovim
-Install neovim with version >= v0.9.5 using your distro's package manager. If the package manager repository does not have the latest version, you can get the latest version (for most Linux package) from an [AppImage](https://github.com/neovim/neovim/blob/master/INSTALL.md#appimage-universal-linux-package) in their GitHub repo.
-
-> [!IMPORTANT]
-> Before installing Neovim, ensure you have a C compiler, Node, Npm, and a Nerd font installed. I personally use Jetbrains Mono which is the font in the fonts dotfiles above.
-
-```bash
-sudo pacman -S nvim
-```
-
-Use stow to create symlinks for the neovim config files:
-
-```bash
-sudo stow nvim
-```
-
-Open your terminal and launch Neovim with the ```nvim``` command.
-
-Setup codeium by typing ```:Codeium Auth``` in your terminal and in the prompt, you will be prompted to enter your codeium api key.
-
-#### Alacritty
-Install alacritty using your distro's package manager:
-
-```bash
-sudo pacman -S alacritty
-```
-If it's not available in your package manager repository, visit alacritty's [official website](https://alacritty.org/) to find out how to install it for your distro.
-
-Create symlinks to the alacritty configuration files:
-
-```bash
-sudo stow alacritty
-```
-
-#### Tmux
-Install tmux using your distro's package manager:
-
-```bash
-sudo pacman -S tmux
-```
-
-Create symlinks to the tmux configuration file:
-
-```bash
-sudo stow tmux
-```
-
-Open your terminal and launch tmux by typing ```tmux```.
-
-Clone the Tmux Plugin Manager (tpm):
-
-```bash
-git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-```
-
-Restart tmux and press ```prefix``` + <kbd>I</kbd> to fetch the defined plugins.
-
-> [!NOTE]
-> To setup catppuccin with tmux, follow these instructions
-
-```bash
-mkdir -p ~/.tmux/plugins/catppuccin
-git clone -b v2.1.3 https://github.com/catppuccin/tmux.git ~/.tmux/plugins/catppuccin/tmux
-```
-The add this to your `~/.tmux.conf` file.
-
-```bash
-set -g @catppuccin_flavor '<flavour>' # | mocha | frappe | latte | macchiato 
-
-run ~/.tmux/plugins/catppuccin/tmux/catppuccin.tmux
-```
-
-
-#### i3
-i3 is a Window Manager.
-
-Install it using the i3-wm package manager.
-
-```bash
-sudo pacman -S i3-wm
-```
-
-And as usual, symlink the config file from the dotfiles dir.
-
-```bash
-sudo stow i3
-```
-
-#### Picom
-Picom is a window compositor for Window Managers (e.g. i3) that do not provide compositing. Essentially, it helps to prevent screen tearing while switching i3 windows.
-
-Install picom using your package manager repository
-```bash
-sudo pacman -S picom
-```
-
-Create symlink using stow
-
-```bash
-sudo stow picom
-```
-
-#### Polybar
-Polybar is a nice, highly customizable status bar for desktop environment. And it's really easy to setup too. I used a pre-defined theme but feel free to customize yours however you feel like.
-
-Install Polybar
-```bash
-sudo pacman -S polybar
-```
-
-Create the configuration file using stow
-
-```bash
-sudo stow polybar
-```
-
-Logout and log back in to the i3 desktop to properly get everything up and running.
-
-#### Backgrounds
-To setup background on the i3 window manager, I use feh, a lightweight image viewer mainly for users of command line interfaces.
-
-But first, use stow to symlink the image in the backgrounds dir which will create a backgrounds symlink within ```~/.config/```. Feel free to put your own desired wallpaper there.
-
-```bash
-sudo stow backgrounds
-```
-
-Next, go ahead and install feh.
-> [!NOTE]
-> I use an AUR package called ```yay``` in arch linux so check to ensure it is available in your package manager's repo or check [here](https://feh.finalrewind.org/) for download instructions.
-
-```bash
-sudo yay -S feh
-```
-
-The command to run feh to setup a wallpaper is already in the i3 config file found in ```~/dotfiles/i3/.config/i3/config``` line 19.
-
-> Remember to change the name of the wallpaper to the wallpaper that was placed in the backgrounds symlink if yours was change. Else, you can leave it as is.
-
-Restart i3 using <span style="color: teal;">$mod</span>+r
-
-> <span style="color: teal;">$mod</span> is the windows or <kbd>alt</kbd> key depending on what was chosen when setting up i3.
-
-#### Rofi
-Rofi is a window switcher, application launcher, and ssh-launcher, that can act as a replacement for dmenu that comes with 13-wm.
-
-Install rofi.
-> [!NOTE]
-> Again, I use ```yay``` to install this package.
-
-```bash
-sudo yay -S rofi
-```
-
-Setup the config using stow
-```bash
-sudo stow rofi
-```
-
-I have the configurations setup for rofi in i3 config by binding rofi to <span style="color:teal;">$mod</span>+Space.
-
-
-#### Emoji
-Using yay, install emote, a modern emoji picker for Linux. Install it from aur
-
-```bash
-yay -S emote
-```
-To select an emoji, the default keyboard shortcut is `Ctrl+Alt+E`. The keybinding for this has already been setup in the hyprland.config file. Ensure to do this for other window managers or display managers.
-
-
-#### Starship
-Install starship using your package manager:
-
-```bash
-yay -S starship
-```
-
-Update the zshrc file to load starship. Paste this at the end of the file if it's not already there:
-
-```bash
-export STARSHIP_CONFIG=~/.config/starship/starship.toml
-eval "$(starship init zsh)"
-```
-
-Setup starship using stow:
-
-```bash
-sudo stow starship
-```
+- **Navigation keybindings** are remapped to vim motions (`h j k l`) in nvim, tmux, and Hyprland.
+- **Hyprpaper** is configured to use `~/.config/backgrounds/archtv.png`. Edit `hypr/.config/hypr/hyprpaper.conf` to change the wallpaper.
+- **Codeium** requires a free account and one-time auth (`:Codeium Auth` in nvim).
+- **Erlang** compiles from source via asdf — expect 10–20 minutes on first install.
+- The **zinit** plugin manager is bootstrapped automatically on first zsh launch (already wired in `.zshrc`).
