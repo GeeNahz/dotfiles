@@ -18,8 +18,8 @@
 # ===============
 # -- mac --
 # ===============
-eval "$(/opt/homebrew/bin/brew shellenv)"
-export PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH"
+# eval "$(/opt/homebrew/bin/brew shellenv)"
+# export PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH"
 
 # ===============
 # Set the directory we want to store zinit and plugins
@@ -97,15 +97,6 @@ alias stow='sudo STOW_DIR=/usr/local/stow /usr/bin/stow /opt/homebrew/bin/stow'
 
 # ===============
 # pnpm
-export PNPM_HOME="/Users/devontechsys1/.local/share/pnpm"
-case ":$PATH:" in
-  *":$PNPM_HOME/bin:"*) ;;
-  *) export PATH="$PNPM_HOME/bin:$PATH" ;;
-esac
-# pnpm end
-
-# ===============
-# pnpm
 # ===============
 # -- mac --
 # export PNPM_HOME="~/.local/share/pnpm"
@@ -138,9 +129,9 @@ function y() {
 }
 
 # -- mac --
-export NVM_DIR="$HOME/.nvm"
-  [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
-  [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+# export NVM_DIR="$HOME/.nvm"
+#   [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
+#   [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
 
 # -- linux --
 # export NVM_DIR="$HOME/.nvm"
