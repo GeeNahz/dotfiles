@@ -27,11 +27,11 @@ The script detects your OS, installs packages, sets up tooling, and symlinks con
 | `nvim`       | ✓ | ✓ | lazy.nvim, LSP, Codeium, Catppuccin |
 | `vim`        | ✓ | ✓ | vim-plug, NERDTree, ALE, Catppuccin |
 | `tmux`       | ✓ | ✓ | TPM, catppuccin theme (v2.1.3), vim-navigator |
-| `kitty`      | ✓ | ✓ | Catppuccin Mocha theme, JetBrains Mono |
+| `kitty`      | ✓ | ✓ | Catppuccin Mocha theme, JetBrainsMono Nerd Font Mono |
 | `yazi`       | ✓ | ✓ | file manager, Catppuccin Mocha theme |
-| `fonts`      | ✓ | ✓ | JetBrainsMono Nerd Font, MesloLGS NF |
+| `fonts`      | ✓ | ✓ | JetBrainsMono Nerd Font Mono, MesloLGS NF |
 | `backgrounds`| ✓ | ✓ | wallpapers → `~/.config/backgrounds/` |
-| `hypr`       | ✓ | — | Hyprland, Hyprlock, Hyprpaper |
+| `hypr`       | ✓ | — | Hyprland, Hyprlock, Hyprpaper, screenshots |
 | `hyprland-rofi` | ✓ | — | Rofi config for Hyprland |
 | `waybar`     | ✓ | — | status bar, Catppuccin Mocha |
 
@@ -45,7 +45,18 @@ Node.js · Python · Erlang · Elixir
 
 ```
 dotfiles/
-├── install_dev_setup.sh   ← main setup script
+├── install_dev_setup.sh   ← orchestrator — sources all modules and runs them in order
+├── scripts/               ← modular setup scripts (each independently executable)
+│   ├── lib.sh             ← shared: colours, helpers, constants, detect_os()
+│   ├── packages.sh        ← package managers (Arch/yay + macOS/brew)
+│   ├── zsh.sh             ← zsh plugin cloning
+│   ├── tmux.sh            ← TPM + catppuccin theme
+│   ├── vim.sh             ← vim-plug
+│   ├── kitty.sh           ← kitty Catppuccin theme download
+│   ├── asdf.sh            ← asdf install + Node, Python, Erlang, Elixir
+│   ├── stow.sh            ← dotfile symlinking
+│   ├── fonts.sh           ← font cache (Linux) / font copy (macOS)
+│   └── shell.sh           ← default shell change
 │
 ├── zsh/                   .zshrc, .zsh/ (plugin stubs)
 ├── starship/              .config/starship/starship.toml
@@ -72,11 +83,27 @@ dotfiles/
 
 ---
 
+## Running individual modules
+
+Every script in `scripts/` is independently executable — useful when you only need to re-run one step:
+
+```bash
+bash scripts/tmux.sh       # re-install TPM + catppuccin
+bash scripts/stow.sh       # re-symlink dotfiles
+bash scripts/asdf.sh       # re-run language installs
+bash scripts/packages.sh   # install/check packages only
+# etc.
+```
+
+Each module sources `scripts/lib.sh` for shared helpers and constants, then checks `OS` if it needs platform-specific behaviour — detecting it automatically when run standalone.
+
+---
+
 ## What the install script does
 
 1. **Detects OS** — Arch Linux or macOS
 2. **Installs packages**
-   - Arch: `pacman` + `yay` (AUR) — installs Hyprland, waybar, rofi, kitty, nvim, tmux, fzf, bat, ripgrep, starship, yazi, and Erlang build deps
+   - Arch: `pacman` + `yay` (AUR) — installs Hyprland, waybar, rofi, kitty, nvim, tmux, fzf, bat, ripgrep, starship, yazi, grim, slurp, wl-clipboard, and Erlang build deps
    - macOS: Homebrew — installs nvim, tmux, fzf, bat, ripgrep, starship, yazi, kitty (cask), and Erlang build deps
 3. **Clones Zsh plugins** to `~/.zsh/` (must happen before stow so stub dirs aren't symlinked empty)
 4. **Installs Tmux Plugin Manager** + catppuccin theme to `~/.tmux/plugins/`
@@ -136,10 +163,37 @@ Stow symlinks everything into your home directory, so it never needs elevated pr
 
 ---
 
+## Hyprland keybindings reference
+
+| Combo | Action |
+|-------|--------|
+| `SUPER + RETURN` | Open terminal (kitty) |
+| `SUPER + SPACE` | App launcher (rofi) |
+| `SUPER + Q` | Close active window |
+| `SUPER + E` | File manager (dolphin) |
+| `SUPER + V` | Toggle floating |
+| `SUPER + H/J/K/L` | Move focus (vim motions) |
+| `SUPER + SHIFT + H/J/K/L` | Move window |
+| `SUPER + R` → `H/J/K/L` | Resize window (submap) |
+| `SUPER + 1–0` | Switch workspace |
+| `SUPER + SHIFT + 1–0` | Move window to workspace |
+| `SUPER + S` | Toggle scratchpad |
+| `SUPER + ALT + L` | Lock screen (hyprlock) |
+| `SUPER + ALT + S` | Screenshot — full screen → save to file + clipboard |
+| `SUPER + ALT + SHIFT + S` | Screenshot — select region → clipboard |
+| `SUPER + ALT + CTRL + S` | Screenshot — select region → save to `~/Pictures/Screenshots/` |
+| `CTRL + ALT + E` | Emoji picker (emote) |
+
+Screenshots are saved as timestamped PNGs (`YYYYMMDD_HHMMSS.png`) in `~/Pictures/Screenshots/`.
+
+---
+
 ## Notes
 
 - **Navigation keybindings** are remapped to vim motions (`h j k l`) in nvim, tmux, and Hyprland.
 - **Hyprpaper** is configured to use `~/.config/backgrounds/archtv.png`. Edit `hypr/.config/hypr/hyprpaper.conf` to change the wallpaper.
+- **Kitty font** must be `JetBrainsMono Nerd Font Mono` (not MesloLGS NF) for Nerd Font glyphs in the tmux status bar to render correctly. Running `kitten choose-fonts` will overwrite this — set it back in `kitty/.config/kitty/kitty.conf` if needed.
+- **tmux glyphs** rendering as `_` inside kitty is fixed by `term xterm-256color` in `kitty.conf` and `terminal-overrides ",xterm*:RGB"` in `.tmux.conf` — both are already set.
 - **Codeium** requires a free account and one-time auth (`:Codeium Auth` in nvim).
 - **Erlang** compiles from source via asdf — expect 10–20 minutes on first install.
 - The **zinit** plugin manager is bootstrapped automatically on first zsh launch (already wired in `.zshrc`).
