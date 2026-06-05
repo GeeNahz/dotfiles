@@ -354,6 +354,7 @@ Leader key: **`<Space>`**
 
 - **Navigation** uses vim motions (`h j k l`) consistently across nvim, tmux, and Hyprland.
 - **tmux `C-h/j/k/l`** requires the `vim-tmux-navigator` plugin installed via `prefix + I`. Without it, use `prefix + h/j/k/l` for pane navigation.
+- **Kitty cursor shape** — `cursor_shape block` in `kitty.conf` sets the initial shape but can be overridden at runtime by the shell or any client application via DECSCUSR escape sequences. If the cursor reverts to a beam at the prompt, it is kitty's shell integration changing it. Fixed by adding `shell_integration enabled no-cursor` to `kitty.conf`, which disables cursor management by shell integration while keeping all other integration features.
 - **Hyprpaper** is configured to use `~/.config/backgrounds/archtv.png`. Edit `hypr/.config/hypr/hyprpaper.conf` to change the wallpaper.
 - **Kitty font** is set to `MesloLGS NF`. Running `kitten choose-fonts` may overwrite this — restore it in `kitty/.config/kitty/kitty.conf` if needed.
 - **tmux glyphs** rendering as `_` is caused by tmux failing to detect UTF-8. Fixed system-wide by setting `LANG=en_NG.UTF-8` in `/etc/locale.conf`. The `term xterm-256color` setting in `kitty.conf` and `terminal-overrides ",xterm*:RGB"` in `.tmux.conf` handle truecolor and Nerd Font rendering.
