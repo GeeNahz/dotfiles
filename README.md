@@ -26,8 +26,8 @@ The script detects your OS, installs packages, sets up tooling, and symlinks con
 | `starship`   | ✓ | ✓ | prompt — custom config in `starship/` |
 | `nvim`       | ✓ | ✓ | lazy.nvim, LSP, Codeium, Catppuccin |
 | `vim`        | ✓ | ✓ | vim-plug, NERDTree, ALE, Catppuccin |
-| `tmux`       | ✓ | ✓ | TPM, catppuccin theme (v2.1.3), vim-navigator |
-| `kitty`      | ✓ | ✓ | Catppuccin Mocha theme, JetBrainsMono Nerd Font Mono |
+| `tmux`       | ✓ | ✓ | TPM, catppuccin theme, vim-tmux-navigator |
+| `kitty`      | ✓ | ✓ | Catppuccin Mocha theme, MesloLGS NF font |
 | `yazi`       | ✓ | ✓ | file manager, Catppuccin Mocha theme |
 | `fonts`      | ✓ | ✓ | JetBrainsMono Nerd Font Mono, MesloLGS NF |
 | `backgrounds`| ✓ | ✓ | wallpapers → `~/.config/backgrounds/` |
@@ -106,7 +106,7 @@ Each module sources `scripts/lib.sh` for shared helpers and constants, then chec
    - Arch: `pacman` + `yay` (AUR) — installs Hyprland, waybar, rofi, kitty, nvim, tmux, fzf, bat, ripgrep, starship, yazi, grim, slurp, wl-clipboard, and Erlang build deps
    - macOS: Homebrew — installs nvim, tmux, fzf, bat, ripgrep, starship, yazi, kitty (cask), and Erlang build deps
 3. **Clones Zsh plugins** to `~/.zsh/` (must happen before stow so stub dirs aren't symlinked empty)
-4. **Installs Tmux Plugin Manager** + catppuccin theme to `~/.tmux/plugins/`
+4. **Installs Tmux Plugin Manager (TPM)** + catppuccin theme to `~/.tmux/plugins/`
 5. **Installs vim-plug** to `~/.vim/autoload/`
 6. **Downloads Kitty Catppuccin Mocha theme** to `~/.config/kitty/current-theme.conf`
 7. **Installs asdf** (language version manager) via git
@@ -117,22 +117,57 @@ Each module sources `scripts/lib.sh` for shared helpers and constants, then chec
 
 ---
 
-## Post-install
+## Post-install setup
 
-After the script finishes and you restart your terminal:
+The install script handles bootstrapping, but a few tools require one-time manual steps after it completes.
+
+### 1. tmux plugins
+
+The install script sets up TPM (Tmux Plugin Manager) but does **not** install the declared plugins — that requires a running tmux session.
 
 ```
-# Install tmux plugins
-tmux  →  <prefix> + I
+tmux                     # start a tmux session
+```
 
-# Neovim plugins (auto-installs on first launch)
+Then press **`C-s I`** (`prefix + Shift-I`) to fetch and install all plugins:
+
+- `catppuccin/tmux` — status bar theme
+- `christoomey/vim-tmux-navigator` — seamless pane navigation with nvim
+
+> **Important:** Until `vim-tmux-navigator` is installed, `Ctrl-h/j/k/l` will not navigate *from* a tmux pane *into* nvim. Navigation in the other direction (nvim → tmux) works immediately via the nvim plugin, but the tmux side requires the plugin to be present.
+
+To reload the config at any time without restarting:
+
+```
+prefix + r       (i.e. C-s r)
+```
+
+### 2. Neovim plugins
+
+Launch nvim — `lazy.nvim` auto-installs all plugins on first run:
+
+```
 nvim
+```
 
-# Authenticate Codeium AI completion
-nvim  →  :Codeium Auth
+Wait for the install to complete before using the editor. Subsequent launches are instant.
 
-# Arch only: apply Hyprland configs
-Log out → log back in  (or: hyprctl reload)
+### 3. Codeium (AI completion)
+
+Inside nvim, authenticate with your free Codeium account:
+
+```
+:Codeium Auth
+```
+
+Follow the browser prompt to link your account. Only needed once per machine.
+
+### 4. Hyprland (Arch only)
+
+Log out and back in to apply the Hyprland config, or reload without logging out:
+
+```
+hyprctl reload
 ```
 
 ---
@@ -163,7 +198,13 @@ Stow symlinks everything into your home directory, so it never needs elevated pr
 
 ---
 
-## Hyprland keybindings reference
+## Keybindings reference
+
+All three tools — Hyprland, tmux, and Neovim — share the same vim-motion convention (`h j k l`) for navigation.
+
+---
+
+### Hyprland (Arch Linux only)
 
 | Combo | Action |
 |-------|--------|
@@ -172,28 +213,150 @@ Stow symlinks everything into your home directory, so it never needs elevated pr
 | `SUPER + Q` | Close active window |
 | `SUPER + E` | File manager (dolphin) |
 | `SUPER + V` | Toggle floating |
+| `SUPER + M` | Exit Hyprland |
 | `SUPER + H/J/K/L` | Move focus (vim motions) |
+| `SUPER + ←/↑/↓/→` | Move focus (arrow keys) |
 | `SUPER + SHIFT + H/J/K/L` | Move window |
-| `SUPER + R` → `H/J/K/L` | Resize window (submap) |
+| `SUPER + R` → `H/J/K/L` | Resize window (submap — press `Esc` to exit) |
 | `SUPER + 1–0` | Switch workspace |
 | `SUPER + SHIFT + 1–0` | Move window to workspace |
 | `SUPER + S` | Toggle scratchpad |
+| `SUPER + SHIFT + S` | Move window to scratchpad |
 | `SUPER + ALT + L` | Lock screen (hyprlock) |
-| `SUPER + ALT + S` | Screenshot — full screen → save to file + clipboard |
+| `SUPER + ALT + S` | Screenshot — full screen → save + clipboard |
 | `SUPER + ALT + SHIFT + S` | Screenshot — select region → clipboard |
 | `SUPER + ALT + CTRL + S` | Screenshot — select region → save to `~/Pictures/Screenshots/` |
 | `CTRL + ALT + E` | Emoji picker (emote) |
+| `SUPER + scroll` | Scroll through workspaces |
+| `SUPER + LMB drag` | Move window |
+| `SUPER + RMB drag` | Resize window |
 
 Screenshots are saved as timestamped PNGs (`YYYYMMDD_HHMMSS.png`) in `~/Pictures/Screenshots/`.
 
 ---
 
+### tmux
+
+Prefix key: **`C-s`** (i.e. `Ctrl + s`)
+
+#### Session & config
+
+| Combo | Action |
+|-------|--------|
+| `prefix + r` | Reload tmux config |
+| `prefix + I` | Install plugins via TPM (run once after first launch) |
+
+#### Pane navigation
+
+| Combo | Action |
+|-------|--------|
+| `prefix + h` | Focus pane left |
+| `prefix + j` | Focus pane down |
+| `prefix + k` | Focus pane up |
+| `prefix + l` | Focus pane right |
+| `Ctrl + h/j/k/l` | Focus pane or nvim split — seamless (requires `vim-tmux-navigator` plugin) |
+
+> `Ctrl + h/j/k/l` works across both tmux panes and nvim splits without switching modes. It requires the `vim-tmux-navigator` TPM plugin to be installed (`prefix + I`). Without it, use `prefix + h/j/k/l` to navigate tmux panes.
+
+#### Copy mode (vi keys)
+
+| Combo | Action |
+|-------|--------|
+| `prefix + [` | Enter copy mode |
+| `v` | Begin selection (vi mode) |
+| `y` | Copy selection |
+| `q` | Exit copy mode |
+
+---
+
+### Neovim
+
+Leader key: **`<Space>`**
+
+> `Ctrl + h/j/k/l` navigate seamlessly across nvim splits **and** tmux panes via `nvim-tmux-navigator`. The tmux side of this requires the `vim-tmux-navigator` plugin installed in tmux (`prefix + I`).
+
+#### Window & pane navigation
+
+| Key | Mode | Action |
+|-----|------|--------|
+| `<C-h>` | Normal | Navigate left (nvim split or tmux pane) |
+| `<C-j>` | Normal | Navigate down (nvim split or tmux pane) |
+| `<C-k>` | Normal | Navigate up (nvim split or tmux pane) |
+| `<C-l>` | Normal | Navigate right (nvim split or tmux pane) |
+| `<C-n>` | Normal | Toggle file tree (NvimTree) |
+
+#### Buffers
+
+| Key | Mode | Action |
+|-----|------|--------|
+| `<leader>n` | Normal | Next buffer |
+| `<leader>p` | Normal | Previous buffer |
+| `<leader>x` | Normal | Close current buffer |
+| `<leader>X` | Normal | Close all buffers |
+
+#### Search & files (Telescope)
+
+| Key | Mode | Action |
+|-----|------|--------|
+| `<leader>ff` | Normal | Find files |
+| `<leader>fp` | Normal | Git files |
+| `<leader>fg` | Normal | Live grep |
+| `<leader>fb` | Normal | Open buffers |
+
+#### LSP
+
+| Key | Mode | Action |
+|-----|------|--------|
+| `K` | Normal | Hover docs |
+| `<leader>gd` | Normal | Go to definition |
+| `<leader>gr` | Normal | Go to references |
+| `<leader>ca` | Normal | Code action |
+| `<leader>gf` | Normal | Format buffer |
+
+> `lsp-zero` also registers its default LSP keymaps per buffer on attach. See `:help lsp-zero-keybindings` inside nvim for the full list.
+
+#### Completion (insert mode)
+
+| Key | Mode | Action |
+|-----|------|--------|
+| `<C-y>` | Insert | Confirm completion |
+| `<C-Space>` | Insert | Trigger completion |
+| `<C-u>` | Insert | Scroll docs up |
+| `<C-d>` | Insert | Scroll docs down |
+| `<C-f>` | Insert | LuaSnip jump forward |
+| `<C-b>` | Insert | LuaSnip jump backward |
+
+#### Diagnostics (Trouble)
+
+| Key | Mode | Action |
+|-----|------|--------|
+| `<leader>tt` | Normal | Toggle all diagnostics |
+| `<leader>tT` | Normal | Toggle buffer diagnostics |
+| `<leader>cs` | Normal | Toggle symbols panel |
+| `<leader>cl` | Normal | Toggle LSP panel (defs / refs) |
+| `<leader>xL` | Normal | Toggle location list |
+| `<leader>xQ` | Normal | Toggle quickfix list |
+
+#### Editing & utilities
+
+| Key | Mode | Action |
+|-----|------|--------|
+| `<leader>y` | Normal / Visual | Yank to system clipboard |
+| `<leader>/` | Normal / Visual | Toggle comment |
+| `<leader>h` | Normal | Clear search highlight |
+| `<leader>mp` | Normal | Toggle Markdown preview |
+
+> Formatting on save is automatic via `conform.nvim` for Lua, Python, Rust, and JS/TS files.
+
+---
+
 ## Notes
 
-- **Navigation keybindings** are remapped to vim motions (`h j k l`) in nvim, tmux, and Hyprland.
+- **Navigation** uses vim motions (`h j k l`) consistently across nvim, tmux, and Hyprland.
+- **tmux `C-h/j/k/l`** requires the `vim-tmux-navigator` plugin installed via `prefix + I`. Without it, use `prefix + h/j/k/l` for pane navigation.
 - **Hyprpaper** is configured to use `~/.config/backgrounds/archtv.png`. Edit `hypr/.config/hypr/hyprpaper.conf` to change the wallpaper.
-- **Kitty font** must be `JetBrainsMono Nerd Font Mono` (not MesloLGS NF) for Nerd Font glyphs in the tmux status bar to render correctly. Running `kitten choose-fonts` will overwrite this — set it back in `kitty/.config/kitty/kitty.conf` if needed.
-- **tmux glyphs** rendering as `_` inside kitty is fixed by `term xterm-256color` in `kitty.conf` and `terminal-overrides ",xterm*:RGB"` in `.tmux.conf` — both are already set.
+- **Kitty font** is set to `MesloLGS NF`. Running `kitten choose-fonts` may overwrite this — restore it in `kitty/.config/kitty/kitty.conf` if needed.
+- **tmux glyphs** rendering as `_` is caused by tmux failing to detect UTF-8. Fixed system-wide by setting `LANG=en_NG.UTF-8` in `/etc/locale.conf`. The `term xterm-256color` setting in `kitty.conf` and `terminal-overrides ",xterm*:RGB"` in `.tmux.conf` handle truecolor and Nerd Font rendering.
 - **Codeium** requires a free account and one-time auth (`:Codeium Auth` in nvim).
 - **Erlang** compiles from source via asdf — expect 10–20 minutes on first install.
 - The **zinit** plugin manager is bootstrapped automatically on first zsh launch (already wired in `.zshrc`).
