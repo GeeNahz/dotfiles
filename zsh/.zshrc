@@ -221,6 +221,8 @@ function gpull() {
 }
 export PATH="$HOME/.local/bin:$PATH"
 
+# Package management
+alias yayu="sudo pacman -Syu && yay -Sua"
 
 alias claude_jai_fe="claude --resume 51c4e8c2-e612-4a9a-9f78-8e3b3f57c11f"
 alias claude_ms_be="claude --resume 45e8b66b-4545-4596-bc6b-f3534ee13ca7"
