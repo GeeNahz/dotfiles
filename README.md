@@ -31,7 +31,7 @@ The script detects your OS, installs packages, sets up tooling, and symlinks con
 | `yazi`       | ✓ | ✓ | file manager, Catppuccin Mocha theme |
 | `fonts`      | ✓ | ✓ | JetBrainsMono Nerd Font Mono, MesloLGS NF |
 | `backgrounds`| ✓ | ✓ | wallpapers → `~/.config/backgrounds/` |
-| `hypr`       | ✓ | — | Hyprland, Hyprlock, Hyprpaper, screenshots |
+| `hypr`       | ✓ | — | Hyprland (Lua config), Hyprlock, Hyprpaper, screenshots |
 | `hyprland-rofi` | ✓ | — | Rofi config for Hyprland |
 | `waybar`     | ✓ | — | status bar, Catppuccin Mocha |
 
@@ -67,7 +67,7 @@ dotfiles/
 ├── yazi/                  .config/yazi/
 ├── fonts/                 .fonts/ (TTF files)
 ├── backgrounds/           .config/backgrounds/ (wallpapers)
-├── hypr/                  .config/hypr/ (Hyprland configs)
+├── hypr/                  .config/hypr/ (Hyprland Lua configs)
 ├── hyprland-rofi/         .config/rofi/ (Rofi for Hyprland)
 └── waybar/                .config/waybar/
 ```
@@ -169,6 +169,8 @@ Log out and back in to apply the Hyprland config, or reload without logging out:
 ```
 hyprctl reload
 ```
+
+> Hyprland loads `hyprland.lua` if present; the legacy `hyprland.conf` is ignored when the Lua file exists. This setup uses `hyprland.lua` — do not edit `hyprland.conf` as changes there will have no effect.
 
 ---
 
@@ -355,6 +357,7 @@ Leader key: **`<Space>`**
 - **Navigation** uses vim motions (`h j k l`) consistently across nvim, tmux, and Hyprland.
 - **tmux `C-h/j/k/l`** requires the `vim-tmux-navigator` plugin installed via `prefix + I`. Without it, use `prefix + h/j/k/l` for pane navigation.
 - **Kitty cursor shape** — `cursor_shape block` in `kitty.conf` sets the initial shape but can be overridden at runtime by the shell or any client application via DECSCUSR escape sequences. If the cursor reverts to a beam at the prompt, it is kitty's shell integration changing it. Fixed by adding `shell_integration enabled no-cursor` to `kitty.conf`, which disables cursor management by shell integration while keeping all other integration features.
+- **Hyprland config** is written in Lua (`hyprland.lua` + `mocha.lua`) as of Hyprland ≥ 0.55. The legacy `hyprland.conf` and `mocha.conf` are kept for reference only — Hyprland ignores them when the `.lua` file exists. Edit `hyprland.lua` for all config changes.
 - **Hyprpaper** is configured to use `~/.config/backgrounds/archtv.png`. Edit `hypr/.config/hypr/hyprpaper.conf` to change the wallpaper.
 - **Kitty font** is set to `MesloLGS NF`. Running `kitten choose-fonts` may overwrite this — restore it in `kitty/.config/kitty/kitty.conf` if needed.
 - **tmux glyphs** rendering as `_` is caused by tmux failing to detect UTF-8. Fixed system-wide by setting `LANG=en_NG.UTF-8` in `/etc/locale.conf`. The `term xterm-256color` setting in `kitty.conf` and `terminal-overrides ",xterm*:RGB"` in `.tmux.conf` handle truecolor and Nerd Font rendering.
