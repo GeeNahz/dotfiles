@@ -15,11 +15,14 @@ return {
         javascriptreact = { "prettierd", "prettier", stop_after_first = true },
         typescriptreact = { "prettierd", "prettier", stop_after_first = true },
       },
-      format_on_save = {
-        lsp_fallback = true,
+      -- format_on_save = {   -- blocked editor until formatter finished (async = false)
+      --   lsp_fallback = true,
+      --   lsp_format = "fallback",
+      --   async = false,
+      --   timeout_ms = 1000,
+      -- },
+      format_after_save = {  -- non-blocking: file saves instantly, formatter runs after
         lsp_format = "fallback",
-        async = false,
-        timeout_ms = 1000,
       },
     })
   end

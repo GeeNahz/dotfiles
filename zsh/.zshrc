@@ -64,7 +64,8 @@ HISTFILE=~/.zsh_history
 # Use modern completion system
 # ===============
 autoload -Uz compinit
-compinit
+# compinit          # ran full security check on every shell start (slow)
+compinit -C         # use cached dump; skip security check (safe for personal machines)
 
 zstyle ':completion:*' auto-description 'specify: %d'
 zstyle ':completion:*' completer _expand _complete _correct _approximate
@@ -219,6 +220,10 @@ function gpush() {
 function gpull() {
   git pull $*
 }
+
+# Default EDITOR option
+export EDITOR="nvim"
+
 export PATH="$HOME/.local/bin:$PATH"
 
 # Package management

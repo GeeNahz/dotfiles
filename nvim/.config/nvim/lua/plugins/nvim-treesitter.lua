@@ -38,21 +38,11 @@ return {
 			indent = { enable = true },
 		})
 
-		configs.install({
-			"gleam",
-			"c",
-			"lua",
-			"vim",
-			"vimdoc",
-			"query",
-			"elixir",
-			"heex",
-			"javascript",
-			"html",
-			"eex",
-			"markdown",
-			"markdown_inline",
-		})
+		-- configs.install({  -- redundant: auto_install = true in setup() already handles this
+		-- 	"gleam", "c", "lua", "vim", "vimdoc", "query",
+		-- 	"elixir", "heex", "javascript", "html",
+		-- 	"eex", "markdown", "markdown_inline",
+		-- })
 
 		vim.api.nvim_create_autocmd("FileType", {
 			callback = function(ev)

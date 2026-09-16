@@ -1,9 +1,10 @@
 # Get editor completions based on the config schema
 "$schema" = 'https://starship.rs/config-schema.json'
 
-# Wait 10 milliseconds for starship to check files under the current directory.
-scan_timeout = 10000
-command_timeout = 100000000
+# scan_timeout = 10000       # was 10s — stalled prompt on every cd
+# command_timeout = 100000000  # was effectively infinite
+scan_timeout = 100        # ms to scan dir for module detection (default: 30)
+command_timeout = 2000    # ms cap on any single command (default: 500)
 
 # Inserts a blank line between shell prompts
 add_newline = true

@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+- `starship.toml`: reduce `scan_timeout` from 10 000ms to 100ms and `command_timeout` from ~infinite to 2 000ms to fix prompt stalling after `cd`.
+- `conform.lua`: switch from `format_on_save` (synchronous, blocked editor) to `format_after_save` (async, non-blocking) to remove save freeze and cursor hold.
+- `zsh/.zshrc`: use `compinit -C` to skip the per-shell security check and use the cached completion dump.
+
+### Fixed
+- `lsp-zero.lua`: comment out `MasonToolsInstall` auto-run on startup (was checking/downloading tools on every nvim launch).
+- `lsp-zero.lua`: comment out `pylsp` from `ensure_installed` — it conflicts with `pyright`, causing two LSPs to attach to every Python file.
+- `nvim-treesitter.lua`: comment out explicit `configs.install()` call — `auto_install = true` in `setup()` already covers parser installation.
+
 ### Added
 - Hyprland keybindings for brightness control (`XF86MonBrightnessDown/Up` via `brightnessctl`) and volume control (`XF86AudioMute/LowerVolume/RaiseVolume` via `wpctl`).
 

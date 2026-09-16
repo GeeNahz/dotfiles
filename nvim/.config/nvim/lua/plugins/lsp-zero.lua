@@ -79,8 +79,7 @@ return {
 					"hadolint",
 				},
 			})
-			-- There is an issue with mason-tools-installer running with VeryLazy
-			vim.api.nvim_command("MasonToolsInstall")
+			-- vim.api.nvim_command("MasonToolsInstall") -- ran on every startup; run manually with :MasonToolsInstall
 
 			-- This is where all the LSP shenanigans will live
 			local lsp_zero = require("lsp-zero")
@@ -105,7 +104,7 @@ return {
 					"tailwindcss",
 					"vuels",
 					"pyright",
-					"pylsp",
+					-- "pylsp",  -- conflicts with pyright; two Python LSPs attach simultaneously
 					"ast_grep",
 					"docker_compose_language_service",
 					"dockerls",
