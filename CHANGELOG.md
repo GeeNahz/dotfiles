@@ -8,6 +8,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Changed
+- `lsp-zero.lua`: reformat from tab to 2-space indentation.
+
+### Fixed
+- `lsp-zero.lua`: comment out `nextls` from `ensure_installed` — conflicts with `elixirls`, causing two Elixir LSPs to attach simultaneously.
+
+### Changed
 - `starship.toml`: reduce `scan_timeout` from 10 000ms to 100ms and `command_timeout` from ~infinite to 2 000ms to fix prompt stalling after `cd`.
 - `conform.lua`: switch from `format_on_save` (synchronous, blocked editor) to `format_after_save` (async, non-blocking) to remove save freeze and cursor hold.
 - `zsh/.zshrc`: use `compinit -C` to skip the per-shell security check and use the cached completion dump.
