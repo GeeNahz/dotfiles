@@ -3,11 +3,11 @@
 
 # scan_timeout = 10000       # was 10s — stalled prompt on every cd
 # command_timeout = 100000000  # was effectively infinite
-scan_timeout = 100        # ms to scan dir for module detection (default: 30)
-command_timeout = 2000    # ms cap on any single command (default: 500)
+scan_timeout = 1000        # ms to scan dir for module detection (default: 30)
+command_timeout = 20000    # ms cap on any single command (default: 500)
 
 # Inserts a blank line between shell prompts
-add_newline = true
+add_newline = true # false
 
 # Replace the '❯' symbol in the prompt with '➜'
 [character] # The name of the module we are configuring is 'character'
@@ -16,45 +16,45 @@ error_symbol = '[✗](bold red)' # The 'error_symbol' segment is being set to '�
 
 # Disable the package module, hiding it from the prompt completely
 [package]
-disabled = true
+disabled = false # true
 
 [os]
 disabled = false
 # style = "bg:surface0 fg:text"
 
 [os.symbols]
-Windows = " 󰍲 "
-Ubuntu = " 󰕈 "
-SUSE = "  "
-Raspbian = " 󰐿 "
-Mint = " 󰣭 "
-Macos = " 󰀵 "
-Manjaro = "  "
-Linux = " 󰌽 "
-Gentoo = " 󰣨 "
-Fedora = " 󰣛 "
-Alpine = "  "
-Amazon = "  "
-Android = "  "
-Arch = " 󰣇 "
-Artix = " 󰣇 "
-EndeavourOS = "  "
-CentOS = "  "
-Debian = " 󰣚 "
-Redhat = " 󱄛 "
-RedHatEnterprise = " 󱄛 "
-Pop = "  "
+Windows = "󰍲 "
+Ubuntu = "󰕈 "
+SUSE = " "
+Raspbian = "󰐿 "
+Mint = "󰣭 "
+Macos = "󰀵 "
+Manjaro = " "
+Linux = "󰌽 "
+Gentoo = "󰣨 "
+Fedora = "󰣛 "
+Alpine = " "
+Amazon = " "
+Android = " "
+Arch = "󰣇 "
+Artix = "󰣇 "
+EndeavourOS = " "
+CentOS = " "
+Debian = "󰣚 "
+Redhat = "󱄛 "
+RedHatEnterprise = "󱄛 "
+Pop = " "
 
 [username]
 show_always = true
-format = '[ $user ]($style)'
+format = '[$user ]($style)'
 # style_user = "bg:surface0 fg:text"
 # style_root = "bg:surface0 fg:text"
 
 [directory]
 read_only = "🔒"
 format = "[ $path ]($style)($read_only)"
-truncation_length = 20
+truncation_length = 25
 truncation_symbol = "…/"
 # style = "fg:color_fg0 bg:color_yellow"
 # style = "bold fg:crust bg:peach"

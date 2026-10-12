@@ -8,6 +8,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Changed
+- `starship.toml`: raise `scan_timeout` to 1000ms and `command_timeout` to 20000ms for more headroom on complex directories.
+- `starship.toml`: re-enable `[package]` module (`disabled = false`).
+- `starship.toml`: strip leading space from all `[os.symbols]` icon strings for tighter prompt alignment.
+- `starship.toml`: remove leading space from `[username]` format string (`[ $user ]` → `[$user ]`).
+- `starship.toml`: increase `[directory]` `truncation_length` from 20 to 25 characters.
+
+### Changed
 - `lsp-zero.lua`: reformat from tab to 2-space indentation.
 
 ### Fixed
