@@ -108,9 +108,9 @@ return {
           "ast_grep",
           "docker_compose_language_service",
           "dockerls",
-          "elixirls",
+          -- "elixirls", -- conflicts with expert; two Elixir LSPs attach simultaneously
           -- "nextls", -- conflicts with elixirls; two Elixir LSPs attach simultaneously
-          "expert",
+          "expert", -- conflicts with elixirls; two Elixir LSPs attach simultaneously
         },
         handlers = {
           -- this first function is the "default handler"
