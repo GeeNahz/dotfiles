@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.0] - 2026-10-25
+
 ### Added
 - Hyprland keybindings for brightness control (`XF86MonBrightnessDown/Up` via `brightnessctl`) and volume control (`XF86AudioMute/LowerVolume/RaiseVolume` via `wpctl`).
 - `zsh/.zshrc`: added `claude_subtrack`, `claude_portfolio`, and `claude_keepsake` session aliases.
