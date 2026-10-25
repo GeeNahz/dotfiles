@@ -268,8 +268,8 @@ end)
 
 -- Interactivity/Accessibility
 -- Brightness ctl
-hl.bind(" + XF86MonBrightnessDown", hl.dsp.exec_cmd("brightnessctl set 5%-"))
-hl.bind(" + XF86MonBrightnessUp", hl.dsp.exec_cmd("brightnessctl set +5%"))
+hl.bind(" + XF86MonBrightnessDown", hl.dsp.exec_cmd("brightnessctl set 1%-"))
+hl.bind(" + XF86MonBrightnessUp", hl.dsp.exec_cmd("brightnessctl set +1%"))
 
 -- Volume ctl
 hl.bind(
