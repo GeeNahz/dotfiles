@@ -1,6 +1,6 @@
 #!/bin/bash
 # scripts/asdf.sh — asdf version manager + language installs
-# Installs asdf via git, then installs: Node.js, Python, Erlang, Elixir.
+# Installs asdf via yay (Arch) or Homebrew (macOS), then installs: Node.js, Python, Erlang, Elixir.
 #
 # Run standalone:  bash scripts/asdf.sh
 # Sourced by:      install_dev_setup.sh
@@ -11,24 +11,30 @@ source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/lib.sh"
 install_asdf() {
   step "Installing asdf"
 
-  if [[ -d "$HOME/.asdf/.git" ]]; then
-    info "asdf already installed, pulling latest..."
-    git -C "$HOME/.asdf" pull --ff-only
-  else
-    info "Cloning asdf..."
-    git clone https://github.com/asdf-vm/asdf.git "$HOME/.asdf"
-    ok "asdf installed"
-  fi
+  # asdf >= 0.16 is a compiled binary — cloning the repo no longer installs it.
+  case "${OS:-}" in
+    arch)
+      command -v yay &>/dev/null || die "yay not found — run scripts/packages.sh first"
+      yay -S --needed --noconfirm asdf-vm
+      ;;
+    mac)
+      command -v brew &>/dev/null || die "Homebrew not found — run scripts/packages.sh first"
+      if brew list --formula asdf &>/dev/null; then
+        info "asdf already installed"
+      else
+        brew install asdf
+      fi
+      ;;
+    *) die "Cannot install asdf: unsupported OS '${OS:-unset}'" ;;
+  esac
+  ok "asdf installed"
 }
 
 # ── asdf helpers ──────────────────────────────────────────────────────────────
 _load_asdf() {
-  if [[ -f "$HOME/.asdf/asdf.sh" ]]; then
-    # shellcheck disable=SC1091
-    . "$HOME/.asdf/asdf.sh"
-  else
-    export PATH="$HOME/.asdf/shims:$HOME/.asdf/bin:$PATH"
-  fi
+  # This script doesn't read .zshrc, so put the shims on PATH here
+  # (e.g. Elixir needs to find the asdf-installed Erlang).
+  export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
 }
 
 _plugin_add() {
@@ -49,7 +55,7 @@ _install_lang() {
     asdf install "$plugin" "$version"
   fi
 
-  asdf global "$plugin" "$version"
+  asdf set --home "$plugin" "$version"
   ok "$plugin $version → global"
 }
 

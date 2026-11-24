@@ -7,6 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+- `scripts/asdf.sh`: install asdf via `yay` (Arch) or Homebrew (macOS) instead of cloning the git repo, which no longer provides a working install since asdf 0.16.
+- `scripts/asdf.sh`: `_load_asdf` now only adds the shims directory to `PATH` (honouring `ASDF_DATA_DIR`); legacy `asdf.sh` sourcing dropped.
+- `README.md`: document the asdf ≥ 0.16 requirement, install method, and post-upgrade message.
+- `nvim-treesitter.lua`: reformat from tab to 2-space indentation.
+- `lazy-lock.json`: bump `lazy.nvim`.
+
+### Removed
+- `zsh/.zshrc`: dead asdf completion lines — completion is provided by the package's `_asdf` site-function.
+- `nvim-treesitter.lua`: comment out the `gleam` parser in `ensure_installed`.
+
+### Fixed
+- `scripts/asdf.sh`: replace `asdf global` (removed in asdf 0.16) with `asdf set --home`.
+
 ## [1.0.0] - 2026-10-25
 
 ### Added

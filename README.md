@@ -53,7 +53,7 @@ dotfiles/
 │   ├── tmux.sh            ← TPM + catppuccin theme
 │   ├── vim.sh             ← vim-plug
 │   ├── kitty.sh           ← kitty Catppuccin theme download
-│   ├── asdf.sh            ← asdf install + Node, Python, Erlang, Elixir
+│   ├── asdf.sh            ← asdf install (yay/brew) + Node, Python, Erlang, Elixir
 │   ├── stow.sh            ← dotfile symlinking
 │   ├── fonts.sh           ← font cache (Linux) / font copy (macOS)
 │   └── shell.sh           ← default shell change
@@ -90,7 +90,7 @@ Every script in `scripts/` is independently executable — useful when you only 
 ```bash
 bash scripts/tmux.sh       # re-install TPM + catppuccin
 bash scripts/stow.sh       # re-symlink dotfiles
-bash scripts/asdf.sh       # re-run language installs
+bash scripts/asdf.sh       # re-run asdf + language installs (needs yay or brew)
 bash scripts/packages.sh   # install/check packages only
 # etc.
 ```
@@ -109,8 +109,8 @@ Each module sources `scripts/lib.sh` for shared helpers and constants, then chec
 4. **Installs Tmux Plugin Manager (TPM)** + catppuccin theme to `~/.tmux/plugins/`
 5. **Installs vim-plug** to `~/.vim/autoload/`
 6. **Downloads Kitty Catppuccin Mocha theme** to `~/.config/kitty/current-theme.conf`
-7. **Installs asdf** (language version manager) via git
-8. **Installs languages via asdf**: Node.js, Python, Erlang, Elixir — sets each as global default
+7. **Installs asdf** (language version manager) via `yay` (Arch) or Homebrew (macOS)
+8. **Installs languages via asdf**: Node.js, Python, Erlang, Elixir — sets each as global default (`asdf set --home`, stored in `~/.tool-versions`)
 9. **Stows dotfiles** — creates symlinks in `$HOME` for all active packages; backs up any conflicting files as `<file>.bak`
 10. **Sets up fonts** — Linux: runs `fc-cache`; macOS: copies TTFs to `~/Library/Fonts/`
 11. **Changes default shell** to zsh (registers it in `/etc/shells` if needed)
@@ -362,5 +362,6 @@ Leader key: **`<Space>`**
 - **Kitty font** is set to `MesloLGS NF`. Running `kitten choose-fonts` may overwrite this — restore it in `kitty/.config/kitty/kitty.conf` if needed.
 - **tmux glyphs** rendering as `_` is caused by tmux failing to detect UTF-8. Fixed system-wide by setting `LANG=en_NG.UTF-8` in `/etc/locale.conf`. The `term xterm-256color` setting in `kitty.conf` and `terminal-overrides ",xterm*:RGB"` in `.tmux.conf` handle truecolor and Nerd Font rendering.
 - **Codeium** requires a free account and one-time auth (`:Codeium Auth` in nvim).
+- **asdf** must be ≥ 0.16 (compiled binary). `.zshrc` only needs the shims directory on `PATH`. The AUR package prints its "update your shell configuration" message on every upgrade; no action is needed when already on 0.16 or later, though running `asdf reshim` is harmless.
 - **Erlang** compiles from source via asdf — expect 10–20 minutes on first install.
 - The **zinit** plugin manager is bootstrapped automatically on first zsh launch (already wired in `.zshrc`).
