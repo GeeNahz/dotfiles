@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.1] - 2026-11-24
+
 ### Changed
 - `scripts/asdf.sh`: install asdf via `yay` (Arch) or Homebrew (macOS) instead of cloning the git repo, which no longer provides a working install since asdf 0.16.
 - `scripts/asdf.sh`: `_load_asdf` now only adds the shims directory to `PATH` (honouring `ASDF_DATA_DIR`); legacy `asdf.sh` sourcing dropped.
