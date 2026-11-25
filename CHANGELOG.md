@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+- `zsh/.zshrc`: point the `claude_dotfiles` alias at the current session; previous session ID kept as a comment.
+
 ## [1.0.1] - 2026-11-24
 
 ### Changed

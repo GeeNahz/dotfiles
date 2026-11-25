@@ -225,7 +225,8 @@ export PATH="$HOME/.local/bin:$PATH"
 # Package management
 alias yayu="sudo pacman -Syu && yay -Sua"
 
-alias claude_dotfiles="claude --resume ea2f5ce1-2721-4a2f-8252-878bb019fc03"
+# alias claude_dotfiles="claude --resume ea2f5ce1-2721-4a2f-8252-878bb019fc03"
+alias claude_dotfiles="claude --resume d9f350de-c13a-4476-a99d-cf7c65aae49b"
 alias claude_eko="claude --resume e12425aa-98a9-42f8-a723-2acfd168f2fa"
 alias claude_subtrack="claude --resume 6b5258ff-646c-424d-9ffd-37e699e95f92"
 alias claude_portfolio="claude --resume fb39d4c8-41a6-4db2-9624-51abf4ff3b46"
